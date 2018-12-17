@@ -3,6 +3,7 @@ import Foundation
 //(0,0) correspond à F1
 public protocol ChampDeBatailleProtocol : Sequence {
   associatedtype Carte: CarteProtocol
+    associatedtype Coordonnees: CoordonneesProtocol
 	associatedtype ChampIteratorProtocol : IteratorProtocol
 	where ChampIteratorProtocol.Element == CarteProtocol
 
@@ -14,23 +15,23 @@ public protocol ChampDeBatailleProtocol : Sequence {
   //insererCarte : ChampDeBataille x Carte x Int x Int
   //pre: la case de doit pas être deja occupé
   //post: une carte est ajouté sur le terrain
-  mutating func insererCarte(carte: Carte, X: Int,Y: Int)
+    mutating func insererCarte(carte: Carte, cord : Coordonnees)
 
   //supprimerCarte : ChampDeBataille Int x Int
   //pre: la case de doit pas être vide
   //post: une carte est supprimé du champ de bataille
-  mutating func supprimerCarte(X: Int,Y: Int)
+  mutating func supprimerCarte(cord : Coordonnees)
 
   //avancerCarte : ChampDeBataille Int x Int
   //les coordonnées en paramètre correspondent aux coordonnée actuel de la carte
   //pre: la carte doit être en position arrière, et la position devant elle doit être libre(vide)
   //post: une carte est avancé au front
-  mutating func avancerCarte(X: Int,Y: Int)
+  mutating func avancerCarte(cord : Coordonnees)
 
   //positionLibre: Int x Int -> Bool
   //les paramètres sont des int correspondant à des coordonnées
   //retourne vrai si les coordonnées ne sont pas prise par une carte, faux sinon
-  func positionLibre(x: Int,y: Int)->Bool
+  func positionLibre(cord : Coordonnees)->Bool
 
   //recupererPositionX : Carte -> Int
   //pre: la carte doit exister dans le champ de bataille
