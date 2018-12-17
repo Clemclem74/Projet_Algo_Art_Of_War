@@ -1,0 +1,9 @@
+
+
+
+
+TOUS LES AFFICHAGES DOIVENT ETRE FAITS DANS LE MAIN, DANS LES PROTOCOLES ON NE PEUT PAS FAIRE DE FCT D’AFFICHAGE RENVOYANT UN STRING ET METTRE UN PRINT (en cas de version graphique il faudrait tout changer le protocole)
+ProtocolMain ligne 18 recupererCarte() nous impose de définir une position en int, de plus le type de numérotation n’est pas spécifié (commence à 0 ou à 1)
+coordonneeProtocol Int x Int imposé; il faut spécifier comment sont notées les coordonnées avec un schéma ou quelque chose nous permettant de repérer la bonne position
+JoueurProtocol déployerCarte fait une saisie utilisateur, il n’en faut pas dans les protocoles   FAIT
+————————————————————————————————————————————————————————————————
