@@ -5,6 +5,7 @@ public protocol JoueurProtocol{
     associatedtype Joueur: CarteProtocol
     //permet de récuperer le nom du joueur
     var nom : String {get set}
+    
     // init : -> Joueur
     // Création d'un Joueur, initalisé avec une pioche mélangée, une main possédant 1 roi + 3 cartes (qui seront pioché dans la pioche genéré),
     // un royaume de carte vide, un champ de bataille sous forme de tableau "2D" vide et un cimetière de carte vide.

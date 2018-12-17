@@ -2,8 +2,8 @@ import Fondation
 
 
 struct Coordonnee : CoordonneeProtocol {
-    fileprivate var x : Int
-    fileprivate var y : Int
+    private var x : Int
+    private var y : Int
     
     init(x : Int, y : Int){
         self.x = x

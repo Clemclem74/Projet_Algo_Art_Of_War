@@ -1,4 +1,9 @@
 import Foundation
-struct ChampDeBatailleProtocol : ChampDeBatailleProtocol {
-
+class ChampDeBataille: ChampDeBatailleProtocol {
+    var plateau: [[Int]] = [[]]
+    
+    
+    
 }
+
+
