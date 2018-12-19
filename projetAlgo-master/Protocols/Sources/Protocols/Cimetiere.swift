@@ -23,8 +23,12 @@ fileprivate class CimetiereIterator{
             return nil
         }
         else{
-            for i in
-            
+            for (item,value) in self.cimetiere.enumerated{
+                if value=courant{
+                    cle=item+1
+                }
+            }
+            return self.cimetiere.
     }
     
 }
