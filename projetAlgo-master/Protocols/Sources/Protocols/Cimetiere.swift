@@ -18,7 +18,7 @@ class Cimetiere: Sequence{
         return self.cimetiere.count
     }
     
-    func EstVide()->Bool{
+    func estVide()->Bool{
         return self.cimetiere.isEmpty
     }
     
