@@ -26,27 +26,77 @@ struct Pioche : PiocheProtocol {
     // id 22 : Archer 5
     
     init() {
-        var ensemble_cord : [Coordonnees]
+        var ensemble_cord : [Coordonnees]=[]
         var coord = Coordonnees(x : 0 , y : 1)
-        ensemble_cord[0] = coord
-        var carte = Carte(id : 3 , attaque : 0 , defDefensive : 2 , defOffensive : 1 , etat : Defensif , unite : Soldat , portee : ensemble_cord)
+        ensemble_cord.append(coord)
+        var carte : Carte
+        for i in 3 ... 11 {
+            carte = Carte(id : i , attaque : 0 , defDefensive : 2 , defOffensive : 1 , etat : Defensif , unite : Soldat , portee : ensemble_cord)
+            self.pioche.empiler(carte : carte)
+        }
         
+        for i in 12 ... 17 {
+            carte = Carte(id : i , attaque : 1 , defDefensive : 3 , defOffensive : 2 , etat : Defensif , unite : Garde , portee : ensemble_cord)
+            self.pioche.empiler(carte : carte)
+        }
+        
+        coord = Coordonnees(x : -2 , y : 1)
+        ensemble_cord[0] = coord
+        coord = Coordonnees(x : -1 , y : 2)
+        ensemble_cord.append(coord)
+        coord = Coordonnees(x : 1 , y : 2)
+        ensemble_cord.append(coord)
+        coord = Coordonnees(x : 2 , y : 1)
+        ensemble_cord.append(coord)
+       
+        for i in 18 ... 22 {
+            carte = Carte(id : i , attaque : 1 , defDefensive : 2 , defOffensive : 1 , etat : Defensif , unite : Archer , portee : ensemble_cord)
+            self.pioche.empiler(carte : carte)
+        }
     }
+    
+    mutating func supprimerCarte(){
+        if !estVide() {
+            self.pioche.depiler()
+        }
+        else {
+            fatalError("Supprimer carte d'une pioche vide")
+        }
+    }
+    
+    func nombreOccurence()->Int {
+        return self.pioche.nombre
+    }
+    
+    func estVide()->Bool {
+        return nombreOccurence()==0
+    }
+    
     
     
  }
 
 
-struct PilePioche {
+class PilePioche {
     
     var pile : [Carte] = []
+    var nombre : Int
     
-    mutating func empiler(){
+    mutating func empiler(carte : Carte){
+        nombre=nombre+1
+    }
+    
+    mutating func depiler() {
         
     }
     
-    mutating func depiler(){
+    func sommet()->Carte{
         
     }
 }
+
+
+
+
+
 
