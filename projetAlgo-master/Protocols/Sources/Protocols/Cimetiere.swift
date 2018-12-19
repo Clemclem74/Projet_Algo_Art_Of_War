@@ -19,7 +19,11 @@ fileprivate class CimetiereIterator{
         self.cimetiere=c
     }
     mutating func next()->Carte?{
-        
+        if cimetiere.isEmpty{
+            return nil
+        }
+        else{
+            
     }
     
 }
