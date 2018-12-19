@@ -12,7 +12,7 @@ class Cimetiere: Sequence{
 
 
 fileprivate class CimetiereIterator{
-    private let cimetiere : Cimetiere
+    private var cimetiere : Cimetiere
     private var courant : Carte?
     
     init(_ c: Cimetiere){
@@ -23,12 +23,14 @@ fileprivate class CimetiereIterator{
             return nil
         }
         else{
+            var cle=0
             for (item,value) in self.cimetiere.enumerated{
-                if value=courant{
+                if value==courant{
                     cle=item+1
                 }
             }
-            return self.cimetiere.
+            return self.cimetiere[cle]
+        }
     }
     
 }
