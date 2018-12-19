@@ -4,11 +4,9 @@ import Foundation
 
 
 class Cimetiere: Sequence{
-    var prec: CimetiereNoeud
-    var suiv: CimetiereNoeud
-    
+    fileprivate var cimetiere:[Carte]
     init(){
-        
+        cimetiere=[]
     }
 }
 
