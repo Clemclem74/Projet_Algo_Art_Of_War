@@ -1,6 +1,6 @@
 import Foundation
 class ChampDeBataille: ChampDeBatailleProtocol {
-    var plateau: [[Int?]] = [[Vide,Vide,Vide],[Vide,Vide,Vide]]
+    var plateau: [[Carte?]] = [[Vide,Vide,Vide],[Vide,Vide,Vide]]
     
     init() {
         
