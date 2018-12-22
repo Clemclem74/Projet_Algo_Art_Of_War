@@ -1,0 +1,2 @@
+Carte.swift bon normalement
+Pioche.swift : Presque bon, manque plus qu'à vérifier la Pile et à mettre à jour le protocole
