@@ -11,4 +11,8 @@ JoueurProtocol déployerCarte fait une saisie utilisateur, il n’en faut pas da
 Pour la pioche, probleme : 
 Iterateur inutile et i
 
+Dans ChampDeBataille :
+RecupererPositionX et recupererPositionY remplacé par une fonction qui renvoie des coordonnées 
 
+Dans Joueur : 
+deployerCarte les paramètres x et y remplacés par une coordonnée 
