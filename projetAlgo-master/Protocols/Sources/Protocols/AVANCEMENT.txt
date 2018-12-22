@@ -1,4 +1,4 @@
-Carte.swift bon normalement
+Carte.swift bon normalement sauf que l'attaque des soldats n'est pas variable il doit manquer quelque chose
 Pioche.swift : Presque bon, manque plus qu'à vérifier la Pile et à mettre à jour le protocole
 
 LIS LES QUESTIONS DU TRUC QUESTION AUSSI STP 
