@@ -1,0 +1,3 @@
+Dans mainProtocol :
+estDansMain(carte : Carte)->Bool
+
