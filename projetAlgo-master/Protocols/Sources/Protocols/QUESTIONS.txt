@@ -1,0 +1,2 @@
+ Dans Champs de bataille on a un truc RecupererPositionX et un autre RecupererPositionY, ce serait pas plus logique de faire une seul 
+ fonction qui renvoie une Coordonnée ? 
