@@ -4,3 +4,10 @@
 Dans l'iterateur du champ de bataille on fait que suivant ou un fait devant() gauche() droite() ?
 
 Aucune fonction qui ressort la carte en fonction des coordonnées
+
+
+
+
+
+
+Dans joueur on a des fonctions comme compterCarteChampDeBataille qui devraient être dans le champs de bataill et peutAttaquer aussi genre c'est con. 
