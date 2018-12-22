@@ -26,8 +26,66 @@ class Joueur : JoueurProtocol {
     }
     
     mutating func piocher(){
-        if !(self.pioche.estVide()){
-            
+        if self.pioche.estVide(){
+            fatalError("On essaie de piocher dans une pioche vide")
         }
+        
+        ajouterCarte(carte : Sommet(self.pioche))
+        pioche.supprimerCarte()
     }
+    
+    func peutAttaquer()->Bool {
+        for carte in self.champ_de_bataille.plateau {
+            if carte != Vide {
+                if carte.etat == Offensif {
+                    return True
+                }
+            }
+        }
+        return False
+    }
+    
+    func compterCarteChampDeBataille() -> Int{
+        var cmp : Int = 0 
+        for carte in self.champ_de_bataille.plateau {
+            if carte != Vide {
+                cmp = cmp + 1
+            }
+        }
+        return cmp
+    }
+    
+    mutating func deployerCarte(carte : Carte, cord : Coordonnees) {
+        if self.main.estVide() {
+            fatalError("On veut deployer avec une main vide")
+        }
+        if cord.positionX()>2 || cord.positionX()<0 {
+            fatalError("Coordonne x pas compris entre 0 et 2")
+        }
+        if cord.positionY()>1 || cord.positionY()<0 {
+            fatalError("Coordonne y pas compris entre 0 et 1")
+        }
+        if !self.champ_de_bataille.positionLibre(cord : cord){
+            fatalError("La position n'est pas libre")
+        }
+        carte.etat=Defensif
+        self.champ_de_bataille.insererCarte(carte : carte, cord : cord)
+        self.main.enleverCarte(carte : carte)
+    }
+    
+    func recupererChampDeBataille()->ChampDeBataille {
+        return self.champ_de_bataille
+    }
+    
+    mutating func demobiliser(carte : Carte) {
+        if self.main.estVide() {
+            fatalError("On veut demobiliser une main avec une main vide")
+        }
+        //il faudrait vérifier que la carte est bien dans la main mais il faut donc rajouter une fonction dans le type Main
+        self.royaume.ajouterCarte(carte : Carte)
+        self.main.enleverCarte(carte : carte)
+    }
+    
+    
+    
 }
