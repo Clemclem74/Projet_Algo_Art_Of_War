@@ -57,7 +57,7 @@ struct Pioche : PiocheProtocol {
     
     mutating func supprimerCarte(){
         if !estVide() {
-            self.pioche.depiler()
+            Depiler(pile : pile)
         }
         else {
             fatalError("Supprimer carte d'une pioche vide")
@@ -65,35 +65,71 @@ struct Pioche : PiocheProtocol {
     }
     
     func nombreOccurence()->Int {
-        return self.pioche.nombre
+        return self.pioche.nb
     }
     
     func estVide()->Bool {
-        return nombreOccurence()==0
+        return Pioche_Vide(pioche : self.pioche)
     }
     
     
-    
+    mutating func melangerPioche()
+        var tmp : [Piece] = []
+        while !estVide() {
+            tmp.append(Sommet(pioche : self.pioche))
+            Depiler(pioche : self.pioche)
+        }
+        tmp.shuffle()
+        for i in 0 ... tmp.count-1 {
+            Empiler(pioche : self.pioche , carte : tmp[i])
+        }    
  }
 
 
-class PilePioche {
+fileprivate class PilePiocheNV {
+    var val : Carte 
+    var suiv : PilePioche 
+    var nb : Int
     
-    var pile : [Carte] = []
-    var nombre : Int
-    
-    mutating func empiler(carte : Carte){
-        nombre=nombre+1
-    }
-    
-    mutating func depiler() {
-        
-    }
-    
-    func sommet()->Carte{
-        
+    init(carte : Carte, suiv : Pile = nil){
+        self.val = val
+        self.suiv = suiv
+        self.nb = 1
     }
 }
+
+
+typealias PilePioche = PilePiocheNV?
+
+func Creer_Pioche() -> PilePioche {
+    return nil
+}
+
+func Pioche_Vide(pioche : PilePioche) -> Bool {
+    return pioche == nil
+}
+
+func Sommet(pioche : PilePioche)->Carte{
+    guard let p = PilePioche else {return nil}
+    return pioche.val
+}
+
+
+mutating func Empiler(pioche : PilePioche , carte : Carte){
+    pioche.nb = pioche.nb + 1
+    return = PilePiocheNV(carte : carte, suiv : pioche) 
+}
+
+mutating func Depiler(pioche : PilePioche) {
+    guard let p = pioche else {
+        fatalError("Erreur depile une pile vide")
+    }
+    pioche.nb = pioche.nb - 1
+    return p.suiv
+}
+
+    
+
 
 
 
