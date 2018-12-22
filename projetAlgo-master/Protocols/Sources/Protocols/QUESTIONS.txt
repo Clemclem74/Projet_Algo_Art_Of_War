@@ -1,2 +1,6 @@
  Dans Champs de bataille on a un truc RecupererPositionX et un autre RecupererPositionY, ce serait pas plus logique de faire une seul 
  fonction qui renvoie une Coordonnée ? 
+
+Dans l'iterateur du champ de bataille on fait que suivant ou un fait devant() gauche() droite() ?
+
+Aucune fonction qui ressort la carte en fonction des coordonnées
