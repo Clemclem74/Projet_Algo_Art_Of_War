@@ -11,3 +11,6 @@ Aucune fonction qui ressort la carte en fonction des coordonnées
 
 
 Dans joueur on a des fonctions comme compterCarteChampDeBataille qui devraient être dans le champs de bataill et peutAttaquer aussi genre c'est con. 
+
+
+IMPORTANT : Dans joueur on a une fonction avancerCarte (on l'a aussi dans champs de bataille donc première erreur) mais ils ont mis une note que j'ai pas compris regarde la et dis moi si tu comprends
