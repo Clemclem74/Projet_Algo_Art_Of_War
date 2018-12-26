@@ -1,16 +1,18 @@
  Dans Champs de bataille on a un truc RecupererPositionX et un autre RecupererPositionY, ce serait pas plus logique de faire une seul 
- fonction qui renvoie une Coordonnée ? 
+ fonction qui renvoie une Coordonnée ?
+ 
+ -> Renvoyer un couple d'int ? Oui c'est sur c'est plus logique, apres si ils l'ont specifier comme ça on est pas oblige de faire comme ça ? Fiorio t'a dit quoi du coup ?
 
 Dans l'iterateur du champ de bataille on fait que suivant ou un fait devant() gauche() droite() ?
 
+-> Pour moi on fait que next(), mais je suis pas sur. En soit le champ de bataille c'est comme pour nous le plateau. Faudrait demander a cam si elle a juste fait next dans son iterateur ou si elle peut faire un parcour vertical ou horizontale.
+
 Aucune fonction qui ressort la carte en fonction des coordonnées
 
-
-
-
-
+-> Pareil, est-ce que on peut en rajouter ? Je sais pas si fiorio t'a rep
 
 Dans joueur on a des fonctions comme compterCarteChampDeBataille qui devraient être dans le champs de bataill et peutAttaquer aussi genre c'est con, mais c'est chiant aussi parce que du coup dans Joueur on a pas d'itérateur et du coup on peut pas parcourir le ChampDeBataille.
 
+-> En soit je pense que c'est bien qu'elle soit ici comme ça genre des que un joueur ajoute une piece ou a une piece qui part au cimetiere tu peux le compter a ce moment la. T'a juste a faire +1 ou -1 a chaque fois que tu enleve une carte de ta main / envoie une carte au cimetiere
 
 IMPORTANT : Dans joueur on a une fonction avancerCarte (on l'a aussi dans champs de bataille donc première erreur) mais ils ont mis une note que j'ai pas compris regarde la et dis moi si tu comprends
