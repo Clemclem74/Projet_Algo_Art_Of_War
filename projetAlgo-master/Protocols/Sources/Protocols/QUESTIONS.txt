@@ -18,3 +18,7 @@ Dans joueur on a des fonctions comme compterCarteChampDeBataille qui devraient �
 IMPORTANT : Dans joueur on a une fonction avancerCarte (on l'a aussi dans champs de bataille donc première erreur) mais ils ont mis une note que j'ai pas compris regarde la et dis moi si tu comprends
 
 -> D'après ce que j'ai compris quand une carte du front est tuée (en gros la ligne de devant de ton champ de bataille, les F) et bah la carte qui est sur la ligne de derrière (ligne A) est avancée au front en gros c'est logique genre si dans ta bataille t'a un mec du front qui meurt tu le remplace par un mec de l'arriere garde.
+
+----
+
+Je comprend rien ce qu'elle fait la fonction recuperer main dans main moi par contre
