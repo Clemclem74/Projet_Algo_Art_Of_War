@@ -1,5 +1,6 @@
 Carte.swift bon normalement sauf que l'attaque des soldats n'est pas variable il doit manquer quelque chose
 // Il y manque une fonction qui modifie l'attaque des soldat a chaque tour en fonction du nombre de carte dans la main non ?
+-> Faut le coder directement dans ataque je pense
 
 Pioche.swift : Presque bon, manque plus qu'à vérifier la Pile et à mettre à jour le protocole
 
