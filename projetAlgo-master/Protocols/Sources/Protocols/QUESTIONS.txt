@@ -2,23 +2,43 @@
  fonction qui renvoie une Coordonnée ?
  
  -> Renvoyer un couple d'int ? Oui c'est sur c'est plus logique, apres si ils l'ont specifier comme ça on est pas oblige de faire comme ça ? Fiorio t'a dit quoi du coup ?
+ 
+ ----> Non pas un couple d'Int mais un truc du type Coordonnees genre c'est vachement plus logique et je crois les petits trucs comme ca on a le droit de modifier
+ 
+ 
+ 
 
 Dans l'iterateur du champ de bataille on fait que suivant ou un fait devant() gauche() droite() ?
 
 -> Pour moi on fait que next(), mais je suis pas sur. En soit le champ de bataille c'est comme pour nous le plateau. Faudrait demander a cam si elle a juste fait next dans son iterateur ou si elle peut faire un parcour vertical ou horizontale.
 
+----> Ouais faudrait voir 
+
+
+
 Aucune fonction qui ressort la carte en fonction des coordonnées
 
 -> Pareil, est-ce que on peut en rajouter ? Je sais pas si fiorio t'a rep
+
+-----> Bah ca c'est pas vraimen une erreur mais on peut modifier mais il faut être capable d'argumenter sur pourquoi c'était vraiment utile.
+
+
 
 Dans joueur on a des fonctions comme compterCarteChampDeBataille qui devraient être dans le champs de bataill et peutAttaquer aussi genre c'est con, mais c'est chiant aussi parce que du coup dans Joueur on a pas d'itérateur et du coup on peut pas parcourir le ChampDeBataille.
 
 -> En soit je pense que c'est bien qu'elle soit ici comme ça genre des que un joueur ajoute une piece ou a une piece qui part au cimetiere tu peux le compter a ce moment la. T'a juste a faire +1 ou -1 a chaque fois que tu enleve une carte de ta main / envoie une carte au cimetiere
 
+-------> Okok
+
+
 IMPORTANT : Dans joueur on a une fonction avancerCarte (on l'a aussi dans champs de bataille donc première erreur) mais ils ont mis une note que j'ai pas compris regarde la et dis moi si tu comprends
 
 -> D'après ce que j'ai compris quand une carte du front est tuée (en gros la ligne de devant de ton champ de bataille, les F) et bah la carte qui est sur la ligne de derrière (ligne A) est avancée au front en gros c'est logique genre si dans ta bataille t'a un mec du front qui meurt tu le remplace par un mec de l'arriere garde.
 
-----
+------> Ah ouais pas con
+
+
 
 Je comprend rien ce qu'elle fait la fonction recuperer main dans main moi par contre
+
+-> C'est complètement con cette fonction, déjà ils parlent d'input et d'affichage alors que ca doit se faire dans le main ca, mais en plus ils disent aue ca renvoie un string alors que dans la spécif ca renvoie un tableau de cartes, et nous la main c'est déjà un tableau de carte du coup inutile cette fonction, fait juste un return main et voilà ou tu la fais pas et tu le notes qu'elle sert à rien et qu'elle est mal spécifiée 
