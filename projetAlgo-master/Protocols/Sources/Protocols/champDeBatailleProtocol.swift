@@ -38,7 +38,7 @@ public protocol ChampDeBatailleProtocol : Sequence {
   //post: retour de la position X de la carte
   func recupererPositionX(carte : Carte)->Int
 
-  //recupererPositionX : Carte -> Int
+  //recupererPositionY: Carte -> Int
   //pre: la carte doit exister dans le champ de bataille
   //post: retour de la position Y de la carte
   func recupererPositionY(carte : Carte)->Int

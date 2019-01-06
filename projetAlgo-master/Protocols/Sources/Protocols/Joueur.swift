@@ -73,10 +73,59 @@ class Joueur : JoueurProtocol {
         self.main.enleverCarte(carte : carte)
     }
     
+	
+	func avancerCarte(carte : Carte) {
+		var pos: Position = self.champ_de_bataille.recupererPosition(carte : carte)
+		self.champ_de_bataille.avancerCarte(cord : pos)
+	}
+	
+	
     func recupererChampDeBataille()->ChampDeBataille {
         return self.champ_de_bataille
     }
-    
+	
+	
+	//Modif des spécifs
+	 func attaquer(joueuradverse : Joueur ,carteAttaquante : Carte, carteAttaque : Carte)->Bool {
+		if carteAttaquante.recupererEtat() == Offensif {
+			fatalError("On veut attaquer avec une carte déjà en posiion offensive")
+		}
+		carteAttaquante.changerEtat(etat:Offensif)
+		if carteAttaque.recupererEtat() == Defensif {
+			var AttaqueDefense : Int = carteAttaquante.recupererDefDefensive
+		}
+		else {
+			var AttaqueDefense : Int = carteAttaquante.recupererDefOffensive
+		}
+		if carteAttaquante.recupererAttaque == AttaqueDefense {
+			self.capturer(joueurAdverse : joueurAdverse , carte : carteAttaque)		
+			return true
+		}
+		else if (carteAttaquante.recupererAttaque > AttaqueDefense || carteAttaquante.recupererAttaque > carteAttaque.recupererSante) {
+			var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carteAttaque)
+			joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)
+			if pos.positionY()==0 {
+				var derriere = Coordonnees(x : pos.positionX(), y : pos.positionY()+1)
+				if !joueuradverse.champ_de_bataille.positionLibre(cord:derriere){
+					joueuradverse.champ_de_bataille.avancerCarte(cord : derriere)
+				}
+			}
+			self.cimetiere.ajouterCarte(carte:carteAttaque)
+			return true
+		}
+		else {
+			carteAttaquante.diminuerSante(attaque : carteAttaquante.recupererAttaque)
+			return false
+		}
+	 }
+	 
+	 //Modif des spécif
+	 mutating func capturer(joueurAdverse : Joueur , carte : Carte){
+		var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
+		joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)	 
+		self.royaume.ajouterCarte(carte : carte)
+	}
+	
     mutating func demobiliser(carte : Carte) {
         if self.main.estVide() {
             fatalError("On veut demobiliser une main avec une main vide")
@@ -85,6 +134,10 @@ class Joueur : JoueurProtocol {
         self.royaume.ajouterCarte(carte : Carte)
         self.main.enleverCarte(carte : carte)
     }
+	
+	func ciblesDisponible(joueuraverse : Joueur)->[Carte]{
+		
+	}
     
     
     

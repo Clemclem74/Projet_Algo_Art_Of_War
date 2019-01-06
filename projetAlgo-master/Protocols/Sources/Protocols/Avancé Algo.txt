@@ -1,0 +1,12 @@
+Portée : OK
+ChampDeBataille : OK
+Carte : OK
+Cimetiere : OK mais vérifier pour itérateur inutile
+Pioche : 90% reste itérateur 
+Coordonnées : 80% mais pb
+Joueur : 75% rste 2 fct dures (a cause des 2 champs de bataille)
+Main : pas commencé
+Royaume : pas commencé
+
+
+

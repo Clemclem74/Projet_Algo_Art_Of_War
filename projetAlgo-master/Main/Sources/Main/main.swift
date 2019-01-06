@@ -138,6 +138,10 @@ choisirCoordonneeXY(JoueurSelectionner: joueur2,X : X, Y : Y)
 
 joueur2.deployerCarte(joueur2.main.recupererCarte(type : choisirTypeCarte()),x: X, y: Y)
 
+
+
+
+
 /* Boucle principale du jeu */
 var tour=1
 var joueurActuel : JoueurProtocol
@@ -212,11 +216,12 @@ while(!partiFini){
 
 	/* Choix d'attaquer l'adversaire */
 	} else if (choix == "attaquer"){
+	//-----------------------------------------------RAJOUTER REMPLISSAGE SANTE CARTES---------------------------------------------------------------------------------------------------------------------------
 		attaque = true
 		attaquer : CarteProtocol
 		while(attaque){
 	 		pouvantAttaquer = joueurActuel.UnitePouvantAttaquer()
-      cibleDisponible = joueurActuel.ciblesDisponible(joueur : joueurAdverse)
+			cibleDisponible = joueurActuel.ciblesDisponible(joueur : joueurAdverse)
 			if(cibleDisponible.count>0 || pouvantAttaquer){
 				afficherUnites(unite: cibleDisponible)
 				print("Choisir une cible ou arreter l'attaque avec \"stop\"")
@@ -244,7 +249,7 @@ while(!partiFini){
 					changerCible = false
 					cibleMorte = false
 					while(changerCible == false || cibleMorte == false){
-            unite = joueurActuel.unitePouvantAttaquer(carte : attaquer) //ne montrer que les soldats qui sont en mode defensif
+						unite = joueurActuel.unitePouvantAttaquer(carte : attaquer) //ne montrer que les soldats qui sont en mode defensif
 
 						if(unite.count>0){ // Si le joueur possède des cartes capable d'atteindre des cartes ennemis
 							print(afficherUnites(unite: unite))

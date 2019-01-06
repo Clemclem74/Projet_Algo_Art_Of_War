@@ -59,7 +59,7 @@ public protocol JoueurProtocol{
 
     // capturer : Carte
     // Place une carte ennemie dans le royaume
-    mutating func capturer(Carte : Carte)
+    mutating func capturer(carte : Carte)
 
 
     // ciblesDisponible : Joueur ->[Carte]

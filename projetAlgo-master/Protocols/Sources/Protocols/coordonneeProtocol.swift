@@ -18,6 +18,8 @@ public protocol CoordonneeProtocol {
 
     //lierCarte : Coordonnee x Carte
     //lie une carte à une coordonnée
-    func lierCarte(carte : Carte)
+    func lierCarte(carte : Carte){
+		
+	}
 
 }
