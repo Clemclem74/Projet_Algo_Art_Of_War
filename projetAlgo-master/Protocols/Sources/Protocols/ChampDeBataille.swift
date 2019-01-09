@@ -34,6 +34,10 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         
     }
     
+    func makeIterator() -> Self{
+        return ChampIterator(plateau:Self)
+    }
+    
     func positionLibre(cord : Coordonnee)->Bool{
         return plateau[cord.positionY()][cord.positionX()]==nil
     }
