@@ -736,7 +736,7 @@ class ChampIterator : IteratorProtocol {
     var i : Int = 0
     var j : Int = 0
 
-    init(plateau: Plateau) {
+    init(ch: Plateau) {
         self.plateau = plateau
     }
 
@@ -1233,7 +1233,7 @@ fileprivate class PilePiocheNV {
     var suiv : PilePioche 
     var nb : Int
     
-    init(carte : Carte, suiv : Pile = nil){
+    init(carte : Carte, suiv : PilePioche){
         self.val = val
         self.suiv = suiv
         self.nb = 1

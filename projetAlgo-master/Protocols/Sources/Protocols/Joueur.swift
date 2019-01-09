@@ -37,7 +37,7 @@ class Joueur : JoueurProtocol {
     
     func peutAttaquer()->Bool {
         for carte in self.champ_de_bataille.plateau {
-            if carte != Vide {
+            if carte != [nil] {
                 if carte.etat == Offensif {
                     return True
                 }
@@ -49,7 +49,7 @@ class Joueur : JoueurProtocol {
     func compterCarteChampDeBataille() -> Int{
         var cmp : Int = 0 
         for carte in self.champ_de_bataille.plateau {
-            if carte != Vide {
+            if carte != nil {
                 cmp = cmp + 1
             }
         }
@@ -120,12 +120,7 @@ class Joueur : JoueurProtocol {
 		}
 	 }
 	 
-	 //Modif des spécif
-	 func capturer(joueurAdverse : Joueur , carte : Carte){
-		var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
-		joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)	 
-		self.royaume.ajouterCarte(carte : carte)
-	}
+	 
 	
     func demobiliser(carte : Carte) {
         if self.main.estVide() {
@@ -142,11 +137,11 @@ class Joueur : JoueurProtocol {
 			case (position.positionX()==0 && position.positionY()==0) :
 				switch (portee) {
 					case (portee.positionY()<1) :
-						return Vide
+						return nil
 					case (portee.positionX()==-2 && portee.positionY()==1 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==-1 && portee.positionY()==1 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==0 && portee.positionY()==1 ) :
 						cord=Coordonnee(x:2 , y:0)
 						return cord
@@ -157,9 +152,9 @@ class Joueur : JoueurProtocol {
 						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
 						cord=Coordonnee(x:2 , y:1)
 						return cord
@@ -174,9 +169,9 @@ class Joueur : JoueurProtocol {
 			case (position.positionX()==1 && position.positionY()==0) :
 				switch (portee) {
 					case (portee.positionY()<1) :
-						return Vide
+						return nil
 					case (portee.positionX()==-2 && portee.positionY()==1 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==-1 && portee.positionY()==1 ) :
 						cord=Coordonnee(x:2 , y:0)
 						return cord
@@ -187,9 +182,9 @@ class Joueur : JoueurProtocol {
 						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==1 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
 						cord=Coordonnee(x:2 , y:1)
 						return cord
@@ -200,12 +195,12 @@ class Joueur : JoueurProtocol {
 						cord=Coordonnee(x:0 , y:1)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						return Vide	
+						return nil	
 				}
 			case (position.positionX()==2 && position.positionY()==0) :
 				switch (portee) {
 					case (portee.positionY()<1) :
-						return Vide
+						return nil
 					case (portee.positionX()==-2 && portee.positionY()==1 ) :
 						cord=Coordonnee(x:2 , y:0)
 						return cord
@@ -216,9 +211,9 @@ class Joueur : JoueurProtocol {
 						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==1 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==2 && portee.positionY()==1 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
 						cord=Coordonnee(x:2 , y:1)
 						return cord
@@ -229,19 +224,19 @@ class Joueur : JoueurProtocol {
 						cord=Coordonnee(x:0 , y:1)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 						
 				}
 			case (position.positionX()==0 && position.positionY()==1) :
 				switch (portee) {
 					case (portee.positionY()<2) :
-						return Vide
+						return nil
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
 						cord=Coordonnee(x:2 , y:0)
 						return cord
@@ -255,9 +250,9 @@ class Joueur : JoueurProtocol {
 			case (position.positionX()==1 && position.positionY()==1) :
 				switch (portee) {
 					case (portee.positionY()<2) :
-						return Vide
+						return nil
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
 						cord=Coordonnee(x:2 , y:0)
 						return cord
@@ -268,12 +263,12 @@ class Joueur : JoueurProtocol {
 						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 				}
 			case (position.positionX()==2 && position.positionY()==1) :
 				switch (portee) {
 					case (portee.positionY()<2) :
-						return Vide
+						return nil
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
 						cord=Coordonnee(x:2 , y:0)
 						return cord
@@ -284,9 +279,9 @@ class Joueur : JoueurProtocol {
 						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						return Vide
+						return nil
 				}
 		}
 	}
@@ -298,14 +293,7 @@ class Joueur : JoueurProtocol {
 		self.royaume.ajouterCarte(carte : carte)
 	}
 	
-    func demobiliser(carte : Carte) {
-        if self.main.estVide() {
-            fatalError("On veut demobiliser une main avec une main vide")
-        }
-        //il faudrait vérifier que la carte est bien dans la main mais il faut donc rajouter une fonction dans le type Main
-        self.royaume.ajouterCarte(carte : Carte)
-        self.main.enleverCarte(carte : carte)
-    }
+  
 	
 	func ciblesDisponible(joueuradverse : Joueur)->[Carte]{
         

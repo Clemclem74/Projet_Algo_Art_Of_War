@@ -117,7 +117,7 @@ fileprivate class PilePiocheNV {
     var suiv : PilePioche 
     var nb : Int
     
-    init(carte : Carte, suiv : Pile = nil){
+    init(carte : Carte, suiv : PilePioche = nil){
         self.val = val
         self.suiv = suiv
         self.nb = 1
@@ -141,12 +141,12 @@ func Sommet(pioche : PilePioche)->Carte{
 }
 
 
-mutating func Empiler(pioche : PilePioche , carte : Carte){
+func Empiler(pioche : PilePioche , carte : Carte){
     pioche.nb = pioche.nb + 1
     pioche = PilePiocheNV(carte : carte, suiv : pioche) 
 }
 
-mutating func Depiler(pioche : PilePioche) {
+func Depiler(pioche : PilePioche) {
     guard let p = pioche else {
         fatalError("Erreur depile une pile vide")
     }

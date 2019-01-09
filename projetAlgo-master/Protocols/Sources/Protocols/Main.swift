@@ -99,7 +99,7 @@ class Main : Sequence {
 	}
 	
 	func estVide()->Bool {
-		if self.main==Vide {
+		if self.main==nil {
 			return true
 		}
 		else {

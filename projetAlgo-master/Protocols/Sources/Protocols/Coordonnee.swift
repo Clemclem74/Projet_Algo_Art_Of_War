@@ -20,8 +20,8 @@ struct Coordonnee : CoordonneeProtocol {
     
 	//modif spé
     func retournerCarte(chp : ChampDeBataille)->Carte? {
-		if(chp.plateau[self.x][self.y]==Vide) {
-			return Vide
+		if(chp.plateau[self.x][self.y]==nil) {
+			return nil
 		}
 		else {
 			return chp.plateau[self.x][self.y]

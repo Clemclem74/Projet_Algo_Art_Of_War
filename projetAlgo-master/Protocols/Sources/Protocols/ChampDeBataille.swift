@@ -3,7 +3,7 @@ class ChampIterator : IteratorProtocol {
     var i : Int = 0
     var j : Int = 0
 
-    init(plateau: Plateau) {
+    init(plateau: ChampDeBataille) {
         self.plateau = plateau
     }
 
@@ -15,7 +15,7 @@ class ChampIterator : IteratorProtocol {
         else {
         	if self.j == 2{
                 self.j = 0
-                self.i = self.i +1
+                self.i = self.i + 1
             }
             else{
                 self.j = self.j + 1
@@ -28,17 +28,17 @@ class ChampIterator : IteratorProtocol {
 
 import Foundation
 class ChampDeBataille: ChampDeBatailleProtocol {
-    var plateau: [[Carte?]] = [[Vide,Vide,Vide],[Vide,Vide,Vide]]
+    var plateau: [[Carte?]] = [[nil,nil,nil],[nil,nil,nil]]
     
     init() {
         
     }
     
     func positionLibre(cord : Coordonnee)->Bool{
-        return plateau[cord.positionY()][cord.positionX()]==Vide
+        return plateau[cord.positionY()][cord.positionX()]==nil
     }
     
-    func insererCarte(carte : Carte, cord : Coordonnes) {
+    func insererCarte(carte : Carte, cord : Coordonnee) {
         if !positionLibre(cord){
             fatalError("Insertion sur une carte non vide")
         }
@@ -49,7 +49,7 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         if positionLibre(cord){
             fatalError("Suppression d'une case vide")
         }
-        self.plateau[cord.positionY()][cord.positionX()] = Vide
+        self.plateau[cord.positionY()][cord.positionX()] = nil
     }
     
     func avancerCarte(cord : Coordonnee) {
@@ -61,7 +61,7 @@ class ChampDeBataille: ChampDeBatailleProtocol {
             fatalError("On essaie d'avancer une carte sur une position non libre")
         }
         var tmp : Carte = self.plateau[cord.positionY()][cord.positionX()]
-        self.plateau[cord.positionY()][cord.positionX()] = Vide
+        self.plateau[cord.positionY()][cord.positionX()] = nil
         self.plateau[cord.positionY()-1][cord.positionX()] = tmp
     }
     
@@ -79,7 +79,7 @@ class ChampDeBataille: ChampDeBatailleProtocol {
     func champDeBatailleEstVide()->Bool {
         for i in 0 ... 1 {
             for j in 0 ... 2 {
-                if self.plateau[i][j] != Vide {
+                if self.plateau[i][j] != nil {
                     return False
                 }
             }

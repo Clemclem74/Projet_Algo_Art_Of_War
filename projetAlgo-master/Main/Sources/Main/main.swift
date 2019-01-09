@@ -103,15 +103,15 @@ var choix2 : String
 if let typed = readLine(){
 	choix2=typed
 }
-var joueur1 = JoueurProtocol(nom : choix2, num:1)
+var joueur1 = Joueur(nom : choix2, num:1)
 
 print("Joueur 2 : Veuillez saisir un nom pour votre joueur : ")
 if let typed = readLine(){
 	choix2=typed
 }
-var joueur2 = JoueurProtocol(nom : choix2, num:2)
+var joueur2 = Joueur(nom : choix2, num:2)
 
-var joueurGagnant : JoueurProtocol
+var joueurGagnant : Joueur
 var partiFini = false
 
 print("Joueur 1 : veuillez selectionner une carte à mettre au royaume")
@@ -144,8 +144,8 @@ joueur2.deployerCarte(joueur2.main.recupererCarte(type : choisirTypeCarte()),x: 
 
 /* Boucle principale du jeu */
 var tour=1
-var joueurActuel : JoueurProtocol
-var joueurAdverse : JoueurProtocol
+var joueurActuel : Joueur
+var joueurAdverse : Joueur
 var changerCible = false
 var cibleMorte = false
 var valide = false
@@ -218,7 +218,7 @@ while(!partiFini){
 	} else if (choix == "attaquer"){
 	//-----------------------------------------------RAJOUTER REMPLISSAGE SANTE CARTES---------------------------------------------------------------------------------------------------------------------------
 		attaque = true
-		var attaquer : CarteProtocol
+		var attaquer : Carte
 		while(attaque){
 	 		pouvantAttaquer = joueurActuel.UnitePouvantAttaquer()
 			cibleDisponible = joueurActuel.ciblesDisponible(joueur : joueurAdverse)

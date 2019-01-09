@@ -28,7 +28,7 @@ class RoyaumeIterator : IteratorProtocol {
 
 
 class Royaume : Sequence{
-	var royaume : [Cartes]?
+	var royaume : [Carte]?
    
    
 	init() {
@@ -62,7 +62,7 @@ class Royaume : Sequence{
 	}
 	
 	func estVide()->Bool {
-		if self.royaume == Vide {
+		if self.royaume == nil {
 			return true
 		}
 		else {
