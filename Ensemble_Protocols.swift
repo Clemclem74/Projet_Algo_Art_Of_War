@@ -1,4 +1,43 @@
-import Fondation
+import Foundation
+
+
+
+
+
+
+
+
+
+enum etatCarte{
+    case Offensif,Defensif
+}
+// enumeration permettant de connaitre le rôle d'un carte existante
+enum uniteCarte{
+    case Garde,Soldat,Archer,Roi
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 struct Coordonnee {
@@ -62,16 +101,17 @@ struct Coordonnee {
 
 
 class Joueur {
-    var main = Main()
+    var main : Main
     var champ_de_bataille = ChampDeBataille()
     var pioche = Pioche()
     var royaume = Royaume()
     var cimetiere = Cimetiere()
     
     
-    init(nom : String) {
+    init(nom : String, num : Int) {
         var i = 0
         self.nom = nom
+		self.main=Main(numeroRoi : num)
         self.pioche.melangerPioche()
         for i in 0 ... 3 {
             self.piocher()
@@ -117,7 +157,7 @@ class Joueur {
         return cmp
     }
     
-    func deployerCarte(carte : Carte, cord : Coordonnees) {
+    func deployerCarte(carte : Carte, cord : Coordonnee) {
         if self.main.estVide() {
             fatalError("On veut deployer avec une main vide")
         }
@@ -164,10 +204,10 @@ class Joueur {
 			return true
 		}
 		else if (carteAttaquante.recupererAttaque > AttaqueDefense || carteAttaquante.recupererAttaque > carteAttaque.recupererSante) {
-			var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carteAttaque)
+			var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carteAttaque)
 			joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)
 			if pos.positionY()==0 {
-				var derriere = Coordonnees(x : pos.positionX(), y : pos.positionY()+1)
+				var derriere = Coordonnee(x : pos.positionX(), y : pos.positionY()+1)
 				if !joueuradverse.champ_de_bataille.positionLibre(cord:derriere){
 					joueuradverse.champ_de_bataille.avancerCarte(cord : derriere)
 				}
@@ -183,7 +223,7 @@ class Joueur {
 	 
 	 //Modif des spécif
 	 func capturer(joueurAdverse : Joueur , carte : Carte){
-		var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
+		var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
 		joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)	 
 		self.royaume.ajouterCarte(carte : carte)
 	}
@@ -197,8 +237,8 @@ class Joueur {
         self.main.enleverCarte(carte : carte)
     }
 	
-	privatefunc position_portee(position : Coordonnees, portee : Portee) -> Coordonnees? {
-		var cord : Coordonnees
+	private func position_portee(position : Coordonnee, portee : Portee) -> Coordonnee? {
+		var cord : Coordonnee
 		switch (position) {
 			case (position.positionX()==0 && position.positionY()==0) :
 				switch (portee) {
@@ -209,26 +249,26 @@ class Joueur {
 					case (portee.positionX()==-1 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==0 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:1)
+						cord=Coordonnee(x:2 , y:1)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:1)
+						cord=Coordonnee(x:1 , y:1)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:1)
+						cord=Coordonnee(x:0 , y:1)
 						return cord
 						
 				}
@@ -239,26 +279,26 @@ class Joueur {
 					case (portee.positionX()==-2 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==-1 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:1)
+						cord=Coordonnee(x:2 , y:1)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:1)
+						cord=Coordonnee(x:1 , y:1)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:1)
+						cord=Coordonnee(x:0 , y:1)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
 						return Vide	
@@ -268,26 +308,26 @@ class Joueur {
 					case (portee.positionY()<1) :
 						return Vide
 					case (portee.positionX()==-2 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==-1 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==2 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:1)
+						cord=Coordonnee(x:2 , y:1)
 						return cord
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:1)
+						cord=Coordonnee(x:1 , y:1)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:1)
+						cord=Coordonnee(x:0 , y:1)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
 						return Vide
@@ -304,13 +344,13 @@ class Joueur {
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord	
 				}
 			case (position.positionX()==1 && position.positionY()==1) :
@@ -320,13 +360,13 @@ class Joueur {
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
 						return Vide
@@ -336,13 +376,13 @@ class Joueur {
 					case (portee.positionY()<2) :
 						return Vide
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
 						return Vide
@@ -354,7 +394,7 @@ class Joueur {
 	
 	//Modif des spécif
 	func capturer(joueurAdverse : Joueur , carte : Carte){
-		var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
+		var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
 		joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)	 
 		self.royaume.ajouterCarte(carte : carte)
 	}
@@ -380,7 +420,7 @@ class Joueur {
         
         for i in 0 ... 1 {
             for j in 0 ... 2 {
-                position = Coordonnees(x:j,y:i)
+                position = Coordonnee(x:j,y:i)
                 if !champ_de_bataille_adverse.positionLibre(cord:position) {
                     carte = champ_de_bataille.plateau[i][j];
                     if unitePouvantAttaquer(joueuradverse : joueuradverse, carte : carte)!=[]{
@@ -399,11 +439,11 @@ class Joueur {
         
         var champ_de_bataille_adverse : ChampDeBataille
         var champ_de_bataille : ChampDeBataille
-        var position_carte : Coordonnees
+        var position_carte : Coordonnee
         var carte_attaquante : Carte
         var portee: Portee
         var unites: [Carte]
-        var position:Coordonnees
+        var position:Coordonnee
         
         unites = []
         champ_de_bataille_adverse = joueuradverse.recupererChampDeBataille()
@@ -412,7 +452,7 @@ class Joueur {
         
         for i in 0 ... 1 {
             for j in 0 ... 2 {
-                position = Coordonnees(x:j,y:i)
+                position = Coordonnee(x:j,y:i)
                 if !champ_de_bataille.positionLibre(cord:position) {
                     carte_attaquante = champ_de_bataille.plateau[i][j];
                     for portee in carte_attaquante.portee{
@@ -465,6 +505,10 @@ class Joueur {
 
 
 
+
+
+
+
 //Definition de la structure Portee, qui correspond a la portee d'une carte. (0,0) correspond a la carte elle meme.
 import Foundation
 
@@ -479,7 +523,7 @@ class RoyaumeIterator : IteratorProtocol {
     }
 
     func next() -> Carte? {
-    	let liste = self.royaume.royaume
+    	let liste = self.royaume
         if self.i < 0 || self.i >= self.royaume.nombreOccurence(){
         	return nil 
         }
@@ -494,7 +538,7 @@ class RoyaumeIterator : IteratorProtocol {
 
 
 
-class Royaume : Sequence{
+class Royaume {
 	var royaume : [Cartes]?
    
    
@@ -502,8 +546,8 @@ class Royaume : Sequence{
 		royaume = []
 	}
    
-	func ajouterCarte(carte: Carte){
-		self.royaume.append(carte)
+	func ajouterCarte -> Carte{
+		self.royaume.append(Carte)
 	}
 	
 	func nombreOccurence()->Int {
@@ -579,14 +623,8 @@ class Royaume : Sequence{
 
 
 
-
-
-
-
-
-
-
-
+//
+import Foundation
 
 class Carte{
     var id: Int
@@ -693,6 +731,32 @@ class Carte{
 
 
 
+class ChampIterator : IteratorProtocol {
+    var plateau: [[Carte?]]
+    var i : Int = 0
+    var j : Int = 0
+
+    init(plateau: Plateau) {
+        self.plateau = plateau
+    }
+
+    func next() -> Carte? {
+    	let tab = self.plateau
+        if self.i < 0 || self.i >= 2 || self.j>=3{
+        	return nil 
+        }
+        else {
+        	if self.j == 2{
+                self.j = 0
+                self.i = self.i +1
+            }
+            else{
+                self.j = self.j + 1
+            }
+        	return tab[i][j]
+        }
+    }
+}
 
 
 class ChampDeBataille {
@@ -702,7 +766,7 @@ class ChampDeBataille {
         
     }
     
-    func positionLibre(cord : Coordonnees)->Bool{
+    func positionLibre(cord : Coordonnee)->Bool{
         return plateau[cord.positionY()][cord.positionX()]==Vide
     }
     
@@ -713,18 +777,18 @@ class ChampDeBataille {
         self.plateau[cord.positionY()][cord.positionX()] = carte
     }
     
-    func supprimerCarte(cord : Coordonnees) {
+    func supprimerCarte(cord : Coordonnee) {
         if positionLibre(cord){
             fatalError("Suppression d'une case vide")
         }
         self.plateau[cord.positionY()][cord.positionX()] = Vide
     }
     
-    func avancerCarte(cord : Coordonnees) {
+    func avancerCarte(cord : Coordonnee) {
         if cord.positionY() == 0 {
             fatalError("On essaie d'avancer une carte en position avant")
         }
-        cordFinale = Coordonnees(x : cord.positionX(), y : cord.positionY()-1)
+        cordFinale = Coordonnee(x : cord.positionX(), y : cord.positionY()-1)
         if !positionLibre(cordFinale){
             fatalError("On essaie d'avancer une carte sur une position non libre")
         }
@@ -733,11 +797,11 @@ class ChampDeBataille {
         self.plateau[cord.positionY()-1][cord.positionX()] = tmp
     }
     
-    func recupererPosition(carte : Carte)->Coordonnees {
+    func recupererPosition(carte : Carte)->Coordonnee {
         for i in 0 ... 1 {
             for j in 0 ... 2 {
                 if self.plateau[i][j]==carte {
-                    return Coordonnees(x : j, y : i)
+                    return Coordonnee(x : j, y : i)
                 }
             }
         }
@@ -794,11 +858,7 @@ class ChampDeBataille {
 
 
 
-
-
-
-
-class Cimetiere: Sequence{
+class Cimetier{
     fileprivate var cimetiere:[Carte]
     init(){
         cimetiere=[]
@@ -855,11 +915,7 @@ class Cimetiere: Sequence{
 
 
 
-
-
-
-
-
+import Foundation
 
 
 class MainIterator : IteratorProtocol {
@@ -884,24 +940,24 @@ class MainIterator : IteratorProtocol {
 
 
 
-class Main : Sequence {
+class Main {
     var main : [Carte]?
    
    
-   init(numeoRoi : Int){
-		var ensemble_cord : [Coordonnees]=[]
-        var coord = Coordonnees(x : -2 , y : 1)
+   init(numeroRoi : Int){
+		var ensemble_cord : [Coordonnee]=[]
+        var coord = Coordonnee(x : -2 , y : 1)
         ensemble_cord.append(coord)
-		coord = Coordonnees(x : -1 , y : 1)
+		coord = Coordonnee(x : -1 , y : 1)
         ensemble_cord.append(coord)
-		coord = Coordonnees(x : 0 , y : 1)
+		coord = Coordonnee(x : 0 , y : 1)
         ensemble_cord.append(coord)
-		coord = Coordonnees(x : 1 , y : 1)
+		coord = Coordonnee(x : 1 , y : 1)
         ensemble_cord.append(coord)
-		coord = Coordonnees(x : 2 , y : 1)
+		coord = Coordonnee(x : 2 , y : 1)
         ensemble_cord.append(coord)
-		if numeoRoi == 1 {
-			coord = Coordonnees(x : 0 , y : 2)
+		if numeroRoi == 1 {
+			coord = Coordonnee(x : 0 , y : 2)
 			ensemble_cord.append(coord)
 		}
 		else {
@@ -976,6 +1032,15 @@ class Main : Sequence {
 
 
 
+
+
+
+
+	
+	
+	
+	
+	
 	
 	
 	
@@ -990,22 +1055,6 @@ class Main : Sequence {
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//Definition de la structure Portee, qui correspond a la portee d'une carte. (0,0) correspond a la carte elle meme.
-
-
 struct Portee{
     fileprivate var x:Int
     fileprivate var y:Int
@@ -1025,45 +1074,47 @@ struct Portee{
 	
 }
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 
 
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import Foundation
 
 
 class PiocheIterator : IteratorProtocol {
@@ -1090,7 +1141,7 @@ class PiocheIterator : IteratorProtocol {
 }
 
 // Type Pioche contient une liste de carte et un itérateur permettant de la parcourir
-struct Pioche  {
+struct Pioche {
     var pioche : PilePioche
     // id 1 : Roi 1
     // id 2 : Roi 2
@@ -1116,8 +1167,8 @@ struct Pioche  {
     // id 22 : Archer 5
     
     init() {
-        var ensemble_cord : [Coordonnees]=[]
-        var coord = Coordonnees(x : 0 , y : 1)
+        var ensemble_cord : [Coordonnee]=[]
+        var coord = Coordonnee(x : 0 , y : 1)
         ensemble_cord.append(coord)
         var carte : Carte
         for i in 3 ... 11 {
@@ -1130,13 +1181,13 @@ struct Pioche  {
             self.pioche.empiler(carte : carte)
         }
         
-        coord = Coordonnees(x : -2 , y : 1)
+        coord = Coordonnee(x : -2 , y : 1)
         ensemble_cord[0] = coord
-        coord = Coordonnees(x : -1 , y : 2)
+        coord = Coordonnee(x : -1 , y : 2)
         ensemble_cord.append(coord)
-        coord = Coordonnees(x : 1 , y : 2)
+        coord = Coordonnee(x : 1 , y : 2)
         ensemble_cord.append(coord)
-        coord = Coordonnees(x : 2 , y : 1)
+        coord = Coordonnee(x : 2 , y : 1)
         ensemble_cord.append(coord)
        
         for i in 18 ... 22 {
@@ -1208,7 +1259,7 @@ func Sommet(pioche : PilePioche)->Carte{
 
 mutating func Empiler(pioche : PilePioche , carte : Carte){
     pioche.nb = pioche.nb + 1
-    return = PilePiocheNV(carte : carte, suiv : pioche) 
+    pioche = PilePiocheNV(carte : carte, suiv : pioche) 
 }
 
 mutating func Depiler(pioche : PilePioche) {
@@ -1221,6 +1272,23 @@ mutating func Depiler(pioche : PilePioche) {
 
     
 
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -1365,13 +1433,13 @@ var choix : String
 if let typed = readLine(){
 	choix=typed
 }
-var joueur1 = JoueurProtocol(nom : choix)
+var joueur1 = JoueurProtocol(nom : choix, num:1)
 
 print("Joueur 2 : Veuillez saisir un nom pour votre joueur : ")
 if let typed = readLine(){
 	choix=typed
 }
-var joueur2 = JoueurProtocol(nom : choix)
+var joueur2 = JoueurProtocol(nom : choix, num:2)
 
 var joueurGagnant : JoueurProtocol
 var partiFini = false
@@ -1588,11 +1656,4 @@ while(!partiFini){
 }
 
 print(joueurGagnant.nom+" est le gagnant de la partie !")
-
-
-
-
-
-
-
 
