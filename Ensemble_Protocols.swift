@@ -146,7 +146,7 @@ class Joueur {
                 }
             }
         }
-        return False
+        return false
     }
     
     func compterCarteChampDeBataille() -> Int{
@@ -179,7 +179,7 @@ class Joueur {
     
 	
 	func avancerCarte(carte : Carte) {
-		var pos: Position = self.champ_de_bataille.recupererPosition(carte : carte)
+		var pos: Coordonnee = self.champ_de_bataille.recupererPosition(carte : carte)
 		self.champ_de_bataille.avancerCarte(cord : pos)
 	}
 	
