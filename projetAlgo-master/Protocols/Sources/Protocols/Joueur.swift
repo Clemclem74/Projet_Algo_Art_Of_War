@@ -96,10 +96,10 @@ class Joueur : JoueurProtocol {
 		}
 		carteAttaquante.changerEtat(etat:Offensif)
 		if carteAttaque.recupererEtat() == Defensif {
-			var AttaqueDefense : Int = carteAttaquante.recupererDefDefensive
+			var AttaqueDefense : Int = carteAttaquante.recupererDefDefensive()
 		}
 		else {
-			var AttaqueDefense : Int = carteAttaquante.recupererDefOffensive
+			var AttaqueDefense : Int = carteAttaquante.recupererDefOffensive()
 		}
 		if carteAttaquante.recupererAttaque == AttaqueDefense {
 			self.capturer(joueuradverse : joueuradverse , carte : carteAttaque)		
