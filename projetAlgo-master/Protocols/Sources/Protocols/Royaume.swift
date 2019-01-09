@@ -12,7 +12,7 @@ class RoyaumeIterator : IteratorProtocol {
     }
 
     func next() -> Carte? {
-    	let liste = self.royaume.royaume
+    	let liste = self.royaume
         if self.i < 0 || self.i >= self.royaume.nombreOccurence(){
         	return nil 
         }
