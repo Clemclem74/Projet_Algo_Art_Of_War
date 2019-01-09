@@ -79,6 +79,7 @@ struct Pioche : PiocheProtocol {
             self.pioche.empiler(carte : carte)
         }
     }
+	
     
     func supprimerCarte(){
         if !estVide() {
@@ -96,7 +97,11 @@ struct Pioche : PiocheProtocol {
     func estVide()->Bool {
         return Pioche_Vide(pioche : self.pioche)
     }
-    
+	
+    func makeIterator() -> Self{
+        return PiocheIterator(pioche:Self)
+    }
+
     
     func melangerPioche(){
         var tmp : [Piece] = []
