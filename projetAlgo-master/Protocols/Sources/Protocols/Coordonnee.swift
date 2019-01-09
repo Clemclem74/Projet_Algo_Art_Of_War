@@ -27,6 +27,4 @@ struct Coordonnee : CoordonneeProtocol {
 			return chp.plateau[self.x][self.y]
 		}
     }
-    
-    
 }
