@@ -70,7 +70,7 @@ class Joueur : JoueurProtocol {
         if !self.champ_de_bataille.positionLibre(cord : cord){
             fatalError("La position n'est pas libre")
         }
-        carte.etat=Defensif
+        carte.changerEtat(etat : Defensif)
         self.champ_de_bataille.insererCarte(carte : carte, cord : cord)
         self.main.enleverCarte(carte : carte)
     }
@@ -100,7 +100,7 @@ class Joueur : JoueurProtocol {
 			var AttaqueDefense : Int = carteAttaquante.recupererDefOffensive
 		}
 		if carteAttaquante.recupererAttaque == AttaqueDefense {
-			self.capturer(joueurAdverse : joueurAdverse , carte : carteAttaque)		
+			self.capturer(joueuradverse : joueuradverse , carte : carteAttaque)		
 			return true
 		}
 		else if (carteAttaquante.recupererAttaque > AttaqueDefense || carteAttaquante.recupererAttaque > carteAttaque.recupererSante) {
@@ -288,7 +288,7 @@ class Joueur : JoueurProtocol {
 	}
 	
 	//Modif des spécif
-	func capturer(joueurAdverse : Joueur , carte : Carte){
+	func capturer(joueuradverse : Joueur , carte : Carte){
 		var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
 		joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)	 
 		self.royaume.ajouterCarte(carte : carte)

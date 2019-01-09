@@ -30,6 +30,14 @@ class Carte: CarteProtocol{
         return self.unite
     }
     
+	func recupererdefDefensive()->Inr{
+        return self.defDefensive
+    }
+	
+	func recupererdefOffensive()->Inr{
+        return self.defOffensive
+    }
+	
     func recupererIdCarte()->Int{
         return self.id
     }
