@@ -1,4 +1,29 @@
 import Foundation
+
+
+class PiocheIterator : IteratorProtocol {
+    var pioche: Pioche
+    var i : Int = 0
+
+    init(pioche: Pioche) {
+        self.pioche = pioche
+    }
+
+    func next() -> Pioche? {
+    	let pile = self.pioche
+        if self.i < 0 || self.i >= self.pioche.nombreOccurence(){
+        	return nil 
+        }
+        else {
+        	self.i = self.i+1
+            for j in 0 ..< i{
+        	    Depiler(pioche : pile)
+            }
+            return pile[self.i-1]
+        }
+    }
+}
+
 // Type Pioche contient une liste de carte et un itérateur permettant de la parcourir
 struct Pioche : PiocheProtocol {
     var pioche : PilePioche
