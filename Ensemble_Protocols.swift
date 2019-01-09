@@ -154,19 +154,21 @@ class Joueur  {
             fatalError("On essaie de piocher dans une pioche vide")
         }
         
-        main.ajouterCarte(carte : Sommet(self.pioche))
-        pioche.supprimerCarte()
+        main.ajouterCarte(carte : Sommet(pioche : self.pioche))
+        self.pioche.supprimerCarte()
     }
     
     func peutAttaquer()->Bool {
-        for carte in self.champ_de_bataille.plateau {
-            if carte != [nil] {
-		var etat:etatCarte
-		etat=Offensif
-                if carte.etat == etat {
-                    return True
+        for cartes in self.champ_de_bataille.plateau {
+			for carte in cartes {
+            if carte != nil {
+		
+		
+                if carte.etat == etatCarte.Offensif {
+                    return true
                 }
             }
+		}
         }
         return false
     }
@@ -425,7 +427,9 @@ class Joueur  {
         var unites: [Carte]
         var champ_de_bataille_adverse : ChampDeBataille
         var champ_de_bataille : ChampDeBataille
-        
+        var position:Coordonnee
+		vare carte : Carte
+		
         unites = []
         champ_de_bataille_adverse = joueuradverse.recupererChampDeBataille()
         champ_de_bataille = self.champ_de_bataille
@@ -531,7 +535,7 @@ class RoyaumeIterator {
     var royaume : Royaume
     var i : Int = 0
 
-    init(main: Main) {
+    init(royaume: Royaume) {
         self.royaume = royaume
     }
 
@@ -641,7 +645,7 @@ class Royaume {
 
 
 
-class Carte: {
+class Carte {
     var id: Int
     var attaque: Int
     var defDefensive: Int
@@ -670,11 +674,11 @@ class Carte: {
         return self.unite
     }
     
-	func recupererdefDefensive()->Inr{
+	func recupererdefDefensive()->Int{
         return self.defDefensive
     }
 	
-	func recupererdefOffensive()->Inr{
+	func recupererdefOffensive()->Int{
         return self.defOffensive
     }
 	
@@ -1214,7 +1218,7 @@ class PiocheIterator  {
 }
 
 // Type Pioche contient une liste de carte et un itérateur permettant de la parcourir
-struct Pioche :  {
+struct Pioche  {
     var pioche : PilePioche
     // id 1 : Roi 1
     // id 2 : Roi 2
@@ -1287,7 +1291,7 @@ struct Pioche :  {
         return Pioche_Vide(pioche : self.pioche)
     }
 	
-    func makeIterator() -> Self{
+    func makeIterator() -> PiocheIterator{
         return PiocheIterator(pioche:Self)
     }
 

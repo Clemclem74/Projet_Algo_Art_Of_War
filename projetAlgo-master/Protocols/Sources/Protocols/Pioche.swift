@@ -10,7 +10,7 @@ class PiocheIterator : IteratorProtocol {
     }
 
     func next() -> Pioche? {
-    	let pile = self.pioche
+    	let pile = self.pioche.pioche
         if self.i < 0 || self.i >= self.pioche.nombreOccurence(){
         	return nil 
         }
@@ -51,18 +51,18 @@ struct Pioche : PiocheProtocol {
     // id 22 : Archer 5
     
     init() {
-        var ensemble_cord : [Coordonnee]=[]
+        var ensemble_cord : [Portee]=[]
         var coord = Coordonnee(x : 0 , y : 1)
         ensemble_cord.append(coord)
         var carte : Carte
         for i in 3 ... 11 {
-            carte = Carte(id : i , attaque : 0 , defDefensive : 2 , defOffensive : 1 , etat : Defensif , unite : Soldat , portee : ensemble_cord)
-            self.pioche.empiler(carte : carte)
+            carte = Carte(id : i , attaque : 0 , defDefensive : 2 , defOffensive : 1 , etat : Defensif , unite : uniteCarte.Soldat , portee : ensemble_cord)
+            Empiler(pioche : self.pioche , carte : carte)
         }
         
         for i in 12 ... 17 {
-            carte = Carte(id : i , attaque : 1 , defDefensive : 3 , defOffensive : 2 , etat : Defensif , unite : Garde , portee : ensemble_cord)
-            self.pioche.empiler(carte : carte)
+            carte = Carte(id : i , attaque : 1 , defDefensive : 3 , defOffensive : 2 , etat : Defensif , unite : uniteCarte.Garde , portee : ensemble_cord)
+            Empiler(pioche : self.pioche , carte : carte)
         }
         
         coord = Coordonnee(x : -2 , y : 1)
@@ -75,8 +75,8 @@ struct Pioche : PiocheProtocol {
         ensemble_cord.append(coord)
        
         for i in 18 ... 22 {
-            carte = Carte(id : i , attaque : 1 , defDefensive : 2 , defOffensive : 1 , etat : Defensif , unite : Archer , portee : ensemble_cord)
-            self.pioche.empiler(carte : carte)
+            carte = Carte(id : i , attaque : 1 , defDefensive : 2 , defOffensive : 1 , etat : Defensif , unite : uniteCarte.Archer , portee : ensemble_cord)
+            Empiler(pioche : self.pioche , carte : carte)
         }
     }
 	
@@ -98,7 +98,7 @@ struct Pioche : PiocheProtocol {
         return Pioche_Vide(pioche : self.pioche)
     }
 	
-    func makeIterator() -> Self{
+    func makeIterator() -> PiocheIterator{
         return PiocheIterator(pioche:Self)
     }
 

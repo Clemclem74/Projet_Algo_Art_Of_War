@@ -16,25 +16,18 @@ class Carte: CarteProtocol{
         self.attaque = attaque
         self.defDefensive = defDefensive
         self.defOffensive = defOffensive
-		self.sante=self.defDefensive = defDefensive
+		self.sante=self.defDefensive
         self.etat = etat
         self.unite = unite
         self.portee = portee
     }
     
-    func changerEtat(etat: etatCarte){
-        self.etat=etat
-    }
     
-    func recupererUnite()->uniteCarte{
-        return self.unite
-    }
-    
-	func recupererdefDefensive()->Inr{
+	func recupererDefDefensive()->Int{
         return self.defDefensive
     }
 	
-	func recupererdefOffensive()->Inr{
+	func recupererDefOffensive()->Int{
         return self.defOffensive
     }
 	
@@ -58,17 +51,17 @@ class Carte: CarteProtocol{
 	}
 	
 	//Rajouté des spécifs 
-	func recupererAttaque(){
+	func recupererAttaque()->{
 		return self.attaque
 	}
 	
 	//Rajouté des spécifs
-	func recupererDefDefenseive(){
+	func recupererDefDefensive()->Int{
 		return self.defDefensive
 	}
 	
 	//Rajouté des spécifs
-	func recupererDefOffenseive(){
+	func recupererDefOffensive()->Int{
 		return self.defOffensive
 	}
 }

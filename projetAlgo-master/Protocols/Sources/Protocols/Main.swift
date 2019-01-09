@@ -24,10 +24,11 @@ class MainIterator : IteratorProtocol {
 
 
 class Main : Sequence {
-    var main : [Carte]?
+    var main : [Carte]
    
    
    init(numeroRoi : Int){
+		var Roi : Carte
 		var ensemble_cord : [Coordonnee]=[]
         var coord = Coordonnee(x : -2 , y : 1)
         ensemble_cord.append(coord)
@@ -44,7 +45,7 @@ class Main : Sequence {
 			ensemble_cord.append(coord)
 		}
 		else {
-			Roi = Carte(id : 2, attaque : 1, defDefensive : 5, defOffensive : 4, etat : Defensif, unite : Roi, portee : ensemble_cord)
+			Roi = Carte(id : 2, attaque : 1, defDefensive : 5, defOffensive : 4, etat : Defensif, unite : uniteCarte.Roi, portee : ensemble_cord)
 			self.main = [Roi]
 		}
    }
@@ -74,7 +75,7 @@ class Main : Sequence {
 	
 	func enleverCarte(carte : Carte) {
 		var i : Int = 0
-		var trouve : Bool = True
+		var trouve : Bool = true
 		if self.estVide() {
 			fatalError("Main Vide")
 		}

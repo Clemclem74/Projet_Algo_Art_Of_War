@@ -7,7 +7,7 @@ class RoyaumeIterator : IteratorProtocol {
     var royaume : Royaume
     var i : Int = 0
 
-    init(main: Main) {
+    init(royaume : Royaume) {
         self.royaume = royaume
     }
 
@@ -18,7 +18,8 @@ class RoyaumeIterator : IteratorProtocol {
         }
         else {
         	self.i = self.i+1
-        	return liste[self.i-1]
+			guard let ret : Carte =  liste[self.i-1] else {fatalError("Erreur")}
+        	return ret
         }
     }
 }
@@ -28,7 +29,7 @@ class RoyaumeIterator : IteratorProtocol {
 
 
 class Royaume : Sequence{
-	var royaume : [Carte]?
+	var royaume : [Carte]
    
    
 	init() {
@@ -49,7 +50,7 @@ class Royaume : Sequence{
 	
 	func enleverCarte(carte : Carte) {
 		var i : Int = 0
-		var trouve : Bool = True
+		var trouve : Bool = true
 		if self.estVide() {
 			fatalError("Royaume Vide")
 		}
@@ -71,7 +72,7 @@ class Royaume : Sequence{
 	}
 	
 	func makeIterator() -> RoyaumeIterator {
-		return MainIterator(royaume:self)
+		return RoyaumeIterator(royaume:self)
 	}
 	
 }

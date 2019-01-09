@@ -34,8 +34,8 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         
     }
     
-    func makeIterator() -> Self{
-        return ChampIterator(plateau:Self)
+    func makeIterator() -> ChampIterator{
+        return ChampIterator(plateau:self)
     }
     
     func positionLibre(cord : Coordonnee)->Bool{
@@ -43,14 +43,14 @@ class ChampDeBataille: ChampDeBatailleProtocol {
     }
     
     func insererCarte(carte : Carte, cord : Coordonnee) {
-        if !positionLibre(cord){
+        if !positionLibre(cord : cord){
             fatalError("Insertion sur une carte non vide")
         }
         self.plateau[cord.positionY()][cord.positionX()] = carte
     }
     
     func supprimerCarte(cord : Coordonnee) {
-        if positionLibre(cord){
+        if positionLibre(cord : cord){
             fatalError("Suppression d'une case vide")
         }
         self.plateau[cord.positionY()][cord.positionX()] = nil
@@ -60,16 +60,16 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         if cord.positionY() == 0 {
             fatalError("On essaie d'avancer une carte en position avant")
         }
-        cordFinale = Coordonnee(x : cord.positionX(), y : cord.positionY()-1)
-        if !positionLibre(cordFinale){
+        var cordFinale = Coordonnee(x : cord.positionX(), y : cord.positionY()-1)
+        if !positionLibre(cord : cordFinale){
             fatalError("On essaie d'avancer une carte sur une position non libre")
         }
-        var tmp : Carte = self.plateau[cord.positionY()][cord.positionX()]
+        var tmp : Carte? = self.plateau[cord.positionY()][cord.positionX()]
         self.plateau[cord.positionY()][cord.positionX()] = nil
         self.plateau[cord.positionY()-1][cord.positionX()] = tmp
     }
     
-    func recupererPosition(carte : Carte)->Coordonnee {
+    func recupererPosition(carte : Carte?)->Coordonnee {
         for i in 0 ... 1 {
             for j in 0 ... 2 {
                 if self.plateau[i][j]==carte {
@@ -84,11 +84,11 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         for i in 0 ... 1 {
             for j in 0 ... 2 {
                 if self.plateau[i][j] != nil {
-                    return False
+                    return false
                 }
             }
         }
-        return True
+        return true
     }
     
     

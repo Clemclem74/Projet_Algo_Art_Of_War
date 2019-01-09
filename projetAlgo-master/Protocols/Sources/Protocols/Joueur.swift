@@ -32,21 +32,23 @@ class Joueur : JoueurProtocol {
             fatalError("On essaie de piocher dans une pioche vide")
         }
         
-        main.ajouterCarte(carte : Sommet(self.pioche))
-        pioche.supprimerCarte()
+        main.ajouterCarte(carte : Sommet(self.pioche.pioche))
+        self.pioche.supprimerCarte()
     }
     
     func peutAttaquer()->Bool {
-        for carte in self.champ_de_bataille.plateau {
+        for cartes in self.champ_de_bataille.plateau {
+			for carte in cartes {
             if carte != [nil] {
-		var etat:etatCarte
-		etat=Offensif
-                if carte.etat == etat {
-                    return True
+				guard let carte2:Carte = carte else{fatalError("Carte Vide")}
+                if carte2.etat == etat {
+                    return true
                 }
             }
+			}
         }
         return false
+		
     }
     
     func compterCarteChampDeBataille() -> Int{
@@ -72,7 +74,7 @@ class Joueur : JoueurProtocol {
         if !self.champ_de_bataille.positionLibre(cord : cord){
             fatalError("La position n'est pas libre")
         }
-        carte.changerEtat(etat : Defensif)
+        carte.changerEtat(etat : etatCarte.Defensif)
         self.champ_de_bataille.insererCarte(carte : carte, cord : cord)
         self.main.enleverCarte(carte : carte)
     }
@@ -91,21 +93,22 @@ class Joueur : JoueurProtocol {
 	
 	//Modif des spécifs
 	 func attaquer(joueuradverse : Joueur ,carteAttaquante : Carte, carteAttaque : Carte)->Bool {
-		if carteAttaquante.recupererEtat() == Offensif {
+		var AttaqueDefense : Int
+		if carteAttaquante.recupererEtat() == etatCarte.Offensif {
 			fatalError("On veut attaquer avec une carte déjà en posiion offensive")
 		}
-		carteAttaquante.changerEtat(etat:Offensif)
-		if carteAttaque.recupererEtat() == Defensif {
-			var AttaqueDefense : Int = carteAttaquante.recupererDefDefensive()
+		carteAttaquante.changerEtat(etat:etatCarte.Offensif)
+		if carteAttaque.recupererEtat() == etatCarte.Defensif {
+			AttaqueDefense = carteAttaquante.recupererDefDefensive()
 		}
 		else {
-			var AttaqueDefense : Int = carteAttaquante.recupererDefOffensive()
+			AttaqueDefense = carteAttaquante.recupererDefOffensive()
 		}
-		if carteAttaquante.recupererAttaque == AttaqueDefense {
+		if carteAttaquante.recupererAttaque() == AttaqueDefense {
 			self.capturer(joueuradverse : joueuradverse , carte : carteAttaque)		
 			return true
 		}
-		else if (carteAttaquante.recupererAttaque > AttaqueDefense || carteAttaquante.recupererAttaque > carteAttaque.recupererSante) {
+		else if (carteAttaquante.recupererAttaque() > AttaqueDefense || carteAttaquante.recupererAttaque() > carteAttaque.recupererSante()) {
 			var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carteAttaque)
 			joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)
 			if pos.positionY()==0 {
@@ -118,7 +121,7 @@ class Joueur : JoueurProtocol {
 			return true
 		}
 		else {
-			carteAttaquante.diminuerSante(attaque : carteAttaquante.recupererAttaque)
+			carteAttaquante.diminuerSante(attaque : carteAttaquante.recupererAttaque())
 			return false
 		}
 	 }
@@ -130,163 +133,207 @@ class Joueur : JoueurProtocol {
             fatalError("On veut demobiliser une main avec une main vide")
         }
         //il faudrait vérifier que la carte est bien dans la main mais il faut donc rajouter une fonction dans le type Main
-        self.royaume.ajouterCarte(carte : Carte)
+        self.royaume.ajouterCarte(carte : carte)
         self.main.enleverCarte(carte : carte)
     }
 	
 	private func position_portee(position : Coordonnee, portee : Portee) -> Coordonnee? {
 		var cord : Coordonnee
-		switch (position) {
-			case (position.positionX()==0 && position.positionY()==0) :
-				switch (portee) {
-					case (portee.positionY()<1) :
+			if (position.positionX()==0 && position.positionY()==0) {
+					if (portee.positionY()<1) {
 						return nil
-					case (portee.positionX()==-2 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==1 ) {
 						return nil
-					case (portee.positionX()==-1 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==1 ) {
 						return nil
-					case (portee.positionX()==0 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:2 , y:0)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:1 , y:0)
 						return cord
-					case (portee.positionX()==2 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==2 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:0 , y:0)
 						return cord
-					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==2 ) {
 						return nil
-					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==2 ) {
 						return nil
-					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:2 , y:1)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:1 , y:1)
 						return cord
-					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==2 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:0 , y:1)
 						return cord
+						}
 						
 				}
-			case (position.positionX()==1 && position.positionY()==0) :
-				switch (portee) {
-					case (portee.positionY()<1) :
+			else if (position.positionX()==1 && position.positionY()==0) {
+					if (portee.positionY()<1) {
 						return nil
-					case (portee.positionX()==-2 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==1 ) {
 						return nil
-					case (portee.positionX()==-1 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:2 , y:0)
 						return cord
-					case (portee.positionX()==0 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:1 , y:0)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:0 , y:0)
 						return cord
-					case (portee.positionX()==2 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==2 && portee.positionY()==1 ) {
 						return nil
-					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==2 ) {
 						return nil
-					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:2 , y:1)
 						return cord
-					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:1 , y:1)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:0 , y:1)
 						return cord
-					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==2 && portee.positionY()==2 ) {
 						return nil	
+						}
 				}
-			case (position.positionX()==2 && position.positionY()==0) :
-				switch (portee) {
-					case (portee.positionY()<1) :
+			else if (position.positionX()==2 && position.positionY()==0) {
+					if (portee.positionY()<1) {
 						return nil
-					case (portee.positionX()==-2 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:2 , y:0)
 						return cord
-					case (portee.positionX()==-1 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:1 , y:0)
 						return cord
-					case (portee.positionX()==0 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==1 ) {
 						cord=Coordonnee(x:0 , y:0)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==1 ) {
 						return nil
-					case (portee.positionX()==2 && portee.positionY()==1 ) :
+						}
+					else if (portee.positionX()==2 && portee.positionY()==1 ) {
 						return nil
-					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:2 , y:1)
 						return cord
-					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:1 , y:1)
 						return cord
-					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:0 , y:1)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==2 ) {
 						return nil
-					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==2 && portee.positionY()==2 ) {
 						return nil
+						}
 						
 				}
-			case (position.positionX()==0 && position.positionY()==1) :
-				switch (portee) {
-					case (portee.positionY()<2) :
+			else if (position.positionX()==0 && position.positionY()==1) {
+					if (portee.positionY()<2) {
 						return nil
-					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==2 ) {
 						return nil
-					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==2 ) {
 						return nil
-					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:2 , y:0)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:1 , y:0)
 						return cord
-					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==2 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:0 , y:0)
 						return cord	
+						}
 				}
-			case (position.positionX()==1 && position.positionY()==1) :
-				switch (portee) {
-					case (portee.positionY()<2) :
+			else if (position.positionX()==1 && position.positionY()==1) {
+					if (portee.positionY()<2) {
 						return nil
-					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==2 ) {
 						return nil
-					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:2 , y:0)
 						return cord
-					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:1 , y:0)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:1 , y:0)
 						return cord
-					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						return nil
+						}
+					else if (portee.positionX()==2 && portee.positionY()==2 ) {
+						return 
+						}
 				}
-			case (position.positionX()==2 && position.positionY()==1) :
-				switch (portee) {
-					case (portee.positionY()<2) :
+			else if (position.positionX()==2 && position.positionY()==1) {
+					if (portee.positionY()<2) {
 						return nil
-					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-2 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:2 , y:0)
 						return cord
-					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==-1 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:1 , y:0)
 						return cord
-					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==0 && portee.positionY()==2 ) {
 						cord=Coordonnee(x:0 , y:0)
 						return cord
-					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==1 && portee.positionY()==2 ) {
 						return nil
-					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						}
+					else if (portee.positionX()==2 && portee.positionY()==2 ) {
 						return nil
+					}
 				}
-		}
+		
 	}
 	
 	//Modif des spécif
@@ -303,7 +350,9 @@ class Joueur : JoueurProtocol {
         var unites: [Carte]
         var champ_de_bataille_adverse : ChampDeBataille
         var champ_de_bataille : ChampDeBataille
-        
+        var position:Coordonnee
+		var carte : Carte
+		
         unites = []
         champ_de_bataille_adverse = joueuradverse.recupererChampDeBataille()
         champ_de_bataille = self.champ_de_bataille
@@ -312,9 +361,9 @@ class Joueur : JoueurProtocol {
             for j in 0 ... 2 {
                 position = Coordonnee(x:j,y:i)
                 if !champ_de_bataille_adverse.positionLibre(cord:position) {
-                    carte = champ_de_bataille.plateau[i][j];
+                    guard let carte = champ_de_bataille.plateau[i][j] else {fatalError("Vide")};
                     if unitePouvantAttaquer(joueuradverse : joueuradverse, carte : carte)!=[]{
-                        unites.append(champ_de_bataille_adverse.plateau[i][j])
+                        unites.append(carte)
                     }
                 }
             }
