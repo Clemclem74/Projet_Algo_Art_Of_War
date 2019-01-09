@@ -1365,7 +1365,7 @@ func afficherMain(joueur: Joueur){
 func afficherUnites(unite: [Carte]){
 	var ligne : String
 	print("**********************************************")
-	for(let i = 0;i<unite.count;++i){
+	for(let i=0;i<unite.count;++i){
 
 		if(unite[i] is Carte){
 			ligne += ("-"+unite[i].recupererUnite()+"(id:"+unite[i].recupererIdCarte()+") -")
