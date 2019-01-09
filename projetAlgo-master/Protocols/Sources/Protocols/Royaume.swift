@@ -35,7 +35,7 @@ class Royaume : Sequence{
 		royaume = []
 	}
    
-	func (ajouterCarte : Carte){
+	func ajouterCarte -> Carte{
 		self.royaume.append(Carte)
 	}
 	

@@ -19,8 +19,8 @@ struct Coordonnee : CoordonneeProtocol {
     }
     
 	//modif spé
-     func retournerCarte(chp : ChampDeBataille)->Carte? {
-		if(chp.plateau[self.x][self.y]==Vide {
+    func retournerCarte(chp : ChampDeBataille)->Carte? {
+		if(chp.plateau[self.x][self.y]==Vide) {
 			return Vide
 		}
 		else {

@@ -55,7 +55,7 @@ struct Pioche : PiocheProtocol {
         }
     }
     
-    mutating func supprimerCarte(){
+    func supprimerCarte(){
         if !estVide() {
             Depiler(pile : pile)
         }
@@ -73,7 +73,7 @@ struct Pioche : PiocheProtocol {
     }
     
     
-    mutating func melangerPioche()
+    func melangerPioche()
         var tmp : [Piece] = []
         while !estVide() {
             tmp.append(Sommet(pioche : self.pioche))
@@ -82,7 +82,8 @@ struct Pioche : PiocheProtocol {
         tmp.shuffle()
         for i in 0 ... tmp.count-1 {
             Empiler(pioche : self.pioche , carte : tmp[i])
-        }    
+        }
+	}
  }
 
 

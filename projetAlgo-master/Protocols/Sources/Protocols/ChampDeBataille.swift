@@ -10,21 +10,21 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         return plateau[cord.positionY()][cord.positionX()]==Vide
     }
     
-    mutating func insererCarte(carte : Carte, cord : Coordonnes) {
+    func insererCarte(carte : Carte, cord : Coordonnes) {
         if !positionLibre(cord){
             fatalError("Insertion sur une carte non vide")
         }
         self.plateau[cord.positionY()][cord.positionX()] = carte
     }
     
-    mutating func supprimerCarte(cord : Coordonnees) {
+    func supprimerCarte(cord : Coordonnees) {
         if positionLibre(cord){
             fatalError("Suppression d'une case vide")
         }
         self.plateau[cord.positionY()][cord.positionX()] = Vide
     }
     
-    mutating func avancerCarte(cord : Coordonnees) {
+    func avancerCarte(cord : Coordonnees) {
         if cord.positionY() == 0 {
             fatalError("On essaie d'avancer une carte en position avant")
         }

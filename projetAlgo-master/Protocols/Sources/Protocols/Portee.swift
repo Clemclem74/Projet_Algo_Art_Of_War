@@ -10,7 +10,7 @@ struct Portee: PorteeProtocol{
         self.y=y
     }
 	
-	  func positionX()->Int {
+	func positionX()->Int {
         return self.x
     }
     

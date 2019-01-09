@@ -22,7 +22,7 @@ class Carte: CarteProtocol{
         self.portee = portee
     }
     
-    mutating func changerEtat(etat: etatCarte){
+    func changerEtat(etat: etatCarte){
         self.etat=etat
     }
     
@@ -45,7 +45,7 @@ class Carte: CarteProtocol{
 	}
 	
 	//Rajouté des spécifs
-	mutating func diminuerSante(attaque : Int){
+	func diminuerSante(attaque : Int){
 		self.sante = self.sante - attaque
 	}
 	

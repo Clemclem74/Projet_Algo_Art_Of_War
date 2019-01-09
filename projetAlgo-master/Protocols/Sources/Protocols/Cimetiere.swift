@@ -10,7 +10,7 @@ class Cimetiere: Sequence{
     }
     
     
-    mutating func ajouterCarte(carte : Carte){
+    func ajouterCarte(carte : Carte){
         self.cimetiere.append(carte)
     }
     
