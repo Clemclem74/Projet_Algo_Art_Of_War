@@ -35,8 +35,8 @@ class Royaume : Sequence{
 		royaume = []
 	}
    
-	func ajouterCarte -> Carte{
-		self.royaume.append(Carte)
+	func ajouterCarte(carte:Carte){
+		self.royaume.append(carte)
 	}
 	
 	func nombreOccurence()->Int {

@@ -510,7 +510,7 @@ class Joueur {
 
 
 //Definition de la structure Portee, qui correspond a la portee d'une carte. (0,0) correspond a la carte elle meme.
-import Foundation
+
 
 
 
@@ -538,7 +538,7 @@ class RoyaumeIterator : IteratorProtocol {
 
 
 
-class Royaume {
+class Royaume : Sequence{
 	var royaume : [Cartes]?
    
    
@@ -546,8 +546,8 @@ class Royaume {
 		royaume = []
 	}
    
-	func ajouterCarte -> Carte{
-		self.royaume.append(Carte)
+	func ajouterCarte(carte:Carte){
+		self.royaume.append(carte)
 	}
 	
 	func nombreOccurence()->Int {
@@ -1656,4 +1656,3 @@ while(!partiFini){
 }
 
 print(joueurGagnant.nom+" est le gagnant de la partie !")
-
