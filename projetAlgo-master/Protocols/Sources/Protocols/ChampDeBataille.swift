@@ -34,7 +34,7 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         
     }
     
-    func positionLibre(cord : Coordonnees)->Bool{
+    func positionLibre(cord : Coordonnee)->Bool{
         return plateau[cord.positionY()][cord.positionX()]==Vide
     }
     
@@ -45,18 +45,18 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         self.plateau[cord.positionY()][cord.positionX()] = carte
     }
     
-    func supprimerCarte(cord : Coordonnees) {
+    func supprimerCarte(cord : Coordonnee) {
         if positionLibre(cord){
             fatalError("Suppression d'une case vide")
         }
         self.plateau[cord.positionY()][cord.positionX()] = Vide
     }
     
-    func avancerCarte(cord : Coordonnees) {
+    func avancerCarte(cord : Coordonnee) {
         if cord.positionY() == 0 {
             fatalError("On essaie d'avancer une carte en position avant")
         }
-        cordFinale = Coordonnees(x : cord.positionX(), y : cord.positionY()-1)
+        cordFinale = Coordonnee(x : cord.positionX(), y : cord.positionY()-1)
         if !positionLibre(cordFinale){
             fatalError("On essaie d'avancer une carte sur une position non libre")
         }
@@ -65,11 +65,11 @@ class ChampDeBataille: ChampDeBatailleProtocol {
         self.plateau[cord.positionY()-1][cord.positionX()] = tmp
     }
     
-    func recupererPosition(carte : Carte)->Coordonnees {
+    func recupererPosition(carte : Carte)->Coordonnee {
         for i in 0 ... 1 {
             for j in 0 ... 2 {
                 if self.plateau[i][j]==carte {
-                    return Coordonnees(x : j, y : i)
+                    return Coordonnee(x : j, y : i)
                 }
             }
         }

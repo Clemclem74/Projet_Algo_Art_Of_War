@@ -27,20 +27,20 @@ class Main : Sequence {
     var main : [Carte]?
    
    
-   init(numeoRoi : Int){
-		var ensemble_cord : [Coordonnees]=[]
-        var coord = Coordonnees(x : -2 , y : 1)
+   init(numeroRoi : Int){
+		var ensemble_cord : [Coordonnee]=[]
+        var coord = Coordonnee(x : -2 , y : 1)
         ensemble_cord.append(coord)
-		coord = Coordonnees(x : -1 , y : 1)
+		coord = Coordonnee(x : -1 , y : 1)
         ensemble_cord.append(coord)
-		coord = Coordonnees(x : 0 , y : 1)
+		coord = Coordonnee(x : 0 , y : 1)
         ensemble_cord.append(coord)
-		coord = Coordonnees(x : 1 , y : 1)
+		coord = Coordonnee(x : 1 , y : 1)
         ensemble_cord.append(coord)
-		coord = Coordonnees(x : 2 , y : 1)
+		coord = Coordonnee(x : 2 , y : 1)
         ensemble_cord.append(coord)
-		if numeoRoi == 1 {
-			coord = Coordonnees(x : 0 , y : 2)
+		if numeroRoi == 1 {
+			coord = Coordonnee(x : 0 , y : 2)
 			ensemble_cord.append(coord)
 		}
 		else {

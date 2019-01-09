@@ -51,8 +51,8 @@ struct Pioche : PiocheProtocol {
     // id 22 : Archer 5
     
     init() {
-        var ensemble_cord : [Coordonnees]=[]
-        var coord = Coordonnees(x : 0 , y : 1)
+        var ensemble_cord : [Coordonnee]=[]
+        var coord = Coordonnee(x : 0 , y : 1)
         ensemble_cord.append(coord)
         var carte : Carte
         for i in 3 ... 11 {
@@ -65,13 +65,13 @@ struct Pioche : PiocheProtocol {
             self.pioche.empiler(carte : carte)
         }
         
-        coord = Coordonnees(x : -2 , y : 1)
+        coord = Coordonnee(x : -2 , y : 1)
         ensemble_cord[0] = coord
-        coord = Coordonnees(x : -1 , y : 2)
+        coord = Coordonnee(x : -1 , y : 2)
         ensemble_cord.append(coord)
-        coord = Coordonnees(x : 1 , y : 2)
+        coord = Coordonnee(x : 1 , y : 2)
         ensemble_cord.append(coord)
-        coord = Coordonnees(x : 2 , y : 1)
+        coord = Coordonnee(x : 2 , y : 1)
         ensemble_cord.append(coord)
        
         for i in 18 ... 22 {
@@ -98,9 +98,9 @@ struct Pioche : PiocheProtocol {
     }
     
     
-    func melangerPioche()
+    func melangerPioche(){
         var tmp : [Piece] = []
-        while !estVide() {
+        while !self.estVide() {
             tmp.append(Sommet(pioche : self.pioche))
             Depiler(pioche : self.pioche)
         }
@@ -143,7 +143,7 @@ func Sommet(pioche : PilePioche)->Carte{
 
 mutating func Empiler(pioche : PilePioche , carte : Carte){
     pioche.nb = pioche.nb + 1
-    return = PilePiocheNV(carte : carte, suiv : pioche) 
+    pioche = PilePiocheNV(carte : carte, suiv : pioche) 
 }
 
 mutating func Depiler(pioche : PilePioche) {

@@ -502,8 +502,8 @@ class Royaume : Sequence{
 		royaume = []
 	}
    
-	func ajouterCarte -> Carte{
-		self.royaume.append(Carte)
+	func ajouterCarte(carte: Carte){
+		self.royaume.append(carte)
 	}
 	
 	func nombreOccurence()->Int {
@@ -1163,9 +1163,9 @@ struct Pioche  {
     }
     
     
-    func melangerPioche()
+    func melangerPioche(){
         var tmp : [Piece] = []
-        while !estVide() {
+        while !self.estVide() {
             tmp.append(Sommet(pioche : self.pioche))
             Depiler(pioche : self.pioche)
         }

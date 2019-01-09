@@ -1,15 +1,16 @@
 
 class Joueur : JoueurProtocol {
-    var main = Main()
+    var main : Main
     var champ_de_bataille = ChampDeBataille()
     var pioche = Pioche()
     var royaume = Royaume()
     var cimetiere = Cimetiere()
     
     
-    init(nom : String) {
+    init(nom : String, num : Int) {
         var i = 0
         self.nom = nom
+		self.main=Main(numeroRoi : num)
         self.pioche.melangerPioche()
         for i in 0 ... 3 {
             self.piocher()
@@ -55,7 +56,7 @@ class Joueur : JoueurProtocol {
         return cmp
     }
     
-    func deployerCarte(carte : Carte, cord : Coordonnees) {
+    func deployerCarte(carte : Carte, cord : Coordonnee) {
         if self.main.estVide() {
             fatalError("On veut deployer avec une main vide")
         }
@@ -102,10 +103,10 @@ class Joueur : JoueurProtocol {
 			return true
 		}
 		else if (carteAttaquante.recupererAttaque > AttaqueDefense || carteAttaquante.recupererAttaque > carteAttaque.recupererSante) {
-			var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carteAttaque)
+			var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carteAttaque)
 			joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)
 			if pos.positionY()==0 {
-				var derriere = Coordonnees(x : pos.positionX(), y : pos.positionY()+1)
+				var derriere = Coordonnee(x : pos.positionX(), y : pos.positionY()+1)
 				if !joueuradverse.champ_de_bataille.positionLibre(cord:derriere){
 					joueuradverse.champ_de_bataille.avancerCarte(cord : derriere)
 				}
@@ -121,7 +122,7 @@ class Joueur : JoueurProtocol {
 	 
 	 //Modif des spécif
 	 func capturer(joueurAdverse : Joueur , carte : Carte){
-		var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
+		var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
 		joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)	 
 		self.royaume.ajouterCarte(carte : carte)
 	}
@@ -135,8 +136,8 @@ class Joueur : JoueurProtocol {
         self.main.enleverCarte(carte : carte)
     }
 	
-	privatefunc position_portee(position : Coordonnees, portee : Portee) -> Coordonnees? {
-		var cord : Coordonnees
+	private func position_portee(position : Coordonnee, portee : Portee) -> Coordonnee? {
+		var cord : Coordonnee
 		switch (position) {
 			case (position.positionX()==0 && position.positionY()==0) :
 				switch (portee) {
@@ -147,26 +148,26 @@ class Joueur : JoueurProtocol {
 					case (portee.positionX()==-1 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==0 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:1)
+						cord=Coordonnee(x:2 , y:1)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:1)
+						cord=Coordonnee(x:1 , y:1)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:1)
+						cord=Coordonnee(x:0 , y:1)
 						return cord
 						
 				}
@@ -177,26 +178,26 @@ class Joueur : JoueurProtocol {
 					case (portee.positionX()==-2 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==-1 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:1)
+						cord=Coordonnee(x:2 , y:1)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:1)
+						cord=Coordonnee(x:1 , y:1)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:1)
+						cord=Coordonnee(x:0 , y:1)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
 						return Vide	
@@ -206,26 +207,26 @@ class Joueur : JoueurProtocol {
 					case (portee.positionY()<1) :
 						return Vide
 					case (portee.positionX()==-2 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==-1 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==1 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==2 && portee.positionY()==1 ) :
 						return Vide
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:1)
+						cord=Coordonnee(x:2 , y:1)
 						return cord
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:1)
+						cord=Coordonnee(x:1 , y:1)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:1)
+						cord=Coordonnee(x:0 , y:1)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
 						return Vide
@@ -242,13 +243,13 @@ class Joueur : JoueurProtocol {
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord	
 				}
 			case (position.positionX()==1 && position.positionY()==1) :
@@ -258,13 +259,13 @@ class Joueur : JoueurProtocol {
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
 						return Vide
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==2 && portee.positionY()==2 ) :
 						return Vide
@@ -274,13 +275,13 @@ class Joueur : JoueurProtocol {
 					case (portee.positionY()<2) :
 						return Vide
 					case (portee.positionX()==-2 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:2 , y:0)
+						cord=Coordonnee(x:2 , y:0)
 						return cord
 					case (portee.positionX()==-1 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:1 , y:0)
+						cord=Coordonnee(x:1 , y:0)
 						return cord
 					case (portee.positionX()==0 && portee.positionY()==2 ) :
-						cord=Coordonnees(x:0 , y:0)
+						cord=Coordonnee(x:0 , y:0)
 						return cord
 					case (portee.positionX()==1 && portee.positionY()==2 ) :
 						return Vide
@@ -292,7 +293,7 @@ class Joueur : JoueurProtocol {
 	
 	//Modif des spécif
 	func capturer(joueurAdverse : Joueur , carte : Carte){
-		var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
+		var pos : Coordonnee = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
 		joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)	 
 		self.royaume.ajouterCarte(carte : carte)
 	}
@@ -318,7 +319,7 @@ class Joueur : JoueurProtocol {
         
         for i in 0 ... 1 {
             for j in 0 ... 2 {
-                position = Coordonnees(x:j,y:i)
+                position = Coordonnee(x:j,y:i)
                 if !champ_de_bataille_adverse.positionLibre(cord:position) {
                     carte = champ_de_bataille.plateau[i][j];
                     if unitePouvantAttaquer(joueuradverse : joueuradverse, carte : carte)!=[]{
@@ -337,11 +338,11 @@ class Joueur : JoueurProtocol {
         
         var champ_de_bataille_adverse : ChampDeBataille
         var champ_de_bataille : ChampDeBataille
-        var position_carte : Coordonnees
+        var position_carte : Coordonnee
         var carte_attaquante : Carte
         var portee: Portee
         var unites: [Carte]
-        var position:Coordonnees
+        var position:Coordonnee
         
         unites = []
         champ_de_bataille_adverse = joueuradverse.recupererChampDeBataille()
@@ -350,7 +351,7 @@ class Joueur : JoueurProtocol {
         
         for i in 0 ... 1 {
             for j in 0 ... 2 {
-                position = Coordonnees(x:j,y:i)
+                position = Coordonnee(x:j,y:i)
                 if !champ_de_bataille.positionLibre(cord:position) {
                     carte_attaquante = champ_de_bataille.plateau[i][j];
                     for portee in carte_attaquante.portee{

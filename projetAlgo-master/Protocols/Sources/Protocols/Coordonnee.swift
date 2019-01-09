@@ -1,4 +1,4 @@
-import Fondation
+import Foundation
 
 
 struct Coordonnee : CoordonneeProtocol {
