@@ -29,11 +29,15 @@ class Main : Sequence {
    
    init(numeoRoi : Int){
 		var ensemble_cord : [Coordonnees]=[]
-        var coord = Coordonnees(x : -1 , y : 1)
+        var coord = Coordonnees(x : -2 , y : 1)
+        ensemble_cord.append(coord)
+		coord = Coordonnees(x : -1 , y : 1)
         ensemble_cord.append(coord)
 		coord = Coordonnees(x : 0 , y : 1)
         ensemble_cord.append(coord)
 		coord = Coordonnees(x : 1 , y : 1)
+        ensemble_cord.append(coord)
+		coord = Coordonnees(x : 2 , y : 1)
         ensemble_cord.append(coord)
 		if numeoRoi == 1 {
 			coord = Coordonnees(x : 0 , y : 2)

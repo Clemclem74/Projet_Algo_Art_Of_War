@@ -135,9 +135,234 @@ class Joueur : JoueurProtocol {
         self.main.enleverCarte(carte : carte)
     }
 	
-	func ciblesDisponible(joueuraverse : Joueur)->[Carte]{
-		
+	func position_portee(position : Coordonnees, portee : Portee) -> Coordonnees? {
+		var cord : Coordonnees
+		switch (position) {
+			case (position.positionX()==0 && position.positionY()==0) :
+				switch (portee) {
+					case (portee.positionY()<1) :
+						return Vide
+					case (portee.positionX()==-2 && portee.positionY()==1 ) :
+						return Vide
+					case (portee.positionX()==-1 && portee.positionY()==1 ) :
+						return Vide
+					case (portee.positionX()==0 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:2 ; y:0)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:1 ; y:0)
+						return cord
+					case (portee.positionX()==2 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:0 ; y:0)
+						return cord
+					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						return Vide
+					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						return Vide
+					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:2 ; y:1)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:1 ; y:1)
+						return cord
+					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:0 ; y:1)
+						return cord
+						
+				}
+			case (position.positionX()==1 && position.positionY()==0) :
+				switch (portee) {
+					case (portee.positionY()<1) :
+						return Vide
+					case (portee.positionX()==-2 && portee.positionY()==1 ) :
+						return Vide
+					case (portee.positionX()==-1 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:2 ; y:0)
+						return cord
+					case (portee.positionX()==0 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:1 ; y:0)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:0 ; y:0)
+						return cord
+					case (portee.positionX()==2 && portee.positionY()==1 ) :
+						return Vide
+					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						return Vide
+					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:2 ; y:1)
+						return cord
+					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:1 ; y:1)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:0 ; y:1)
+						return cord
+					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						return Vide	
+				}
+			case (position.positionX()==2 && position.positionY()==0) :
+				switch (portee) {
+					case (portee.positionY()<1) :
+						return Vide
+					case (portee.positionX()==-2 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:2 ; y:0)
+						return cord
+					case (portee.positionX()==-1 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:1 ; y:0)
+						return cord
+					case (portee.positionX()==0 && portee.positionY()==1 ) :
+						cord=Coordonnees(x:0 ; y:0)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==1 ) :
+						return Vide
+					case (portee.positionX()==2 && portee.positionY()==1 ) :
+						return Vide
+					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:2 ; y:1)
+						return cord
+					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:1 ; y:1)
+						return cord
+					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:0 ; y:1)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						return Vide
+					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						return Vide
+						
+				}
+			case (position.positionX()==0 && position.positionY()==1) :
+				switch (portee) {
+					case (portee.positionY()<2) :
+						return Vide
+					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						return Vide
+					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						return Vide
+					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:2 ; y:0)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:1 ; y:0)
+						return cord
+					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:0 ; y:0)
+						return cord	
+				}
+			case (position.positionX()==1 && position.positionY()==1) :
+				switch (portee) {
+					case (portee.positionY()<2) :
+						return Vide
+					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						return Vide
+					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:2 ; y:0)
+						return cord
+					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:1 ; y:0)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:1 ; y:0)
+						return cord
+					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						return Vide
+				}
+			case (position.positionX()==2 && position.positionY()==1) :
+				switch (portee) {
+					case (portee.positionY()<2) :
+						return Vide
+					case (portee.positionX()==-2 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:2 ; y:0)
+						return cord
+					case (portee.positionX()==-1 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:1 ; y:0)
+						return cord
+					case (portee.positionX()==0 && portee.positionY()==2 ) :
+						cord=Coordonnees(x:0 ; y:0)
+						return cord
+					case (portee.positionX()==1 && portee.positionY()==2 ) :
+						return Vide
+					case (portee.positionX()==2 && portee.positionY()==2 ) :
+						return Vide
+				}
+		}
 	}
+	
+	//Modif des spécif
+	 mutating func capturer(joueurAdverse : Joueur , carte : Carte){
+		var pos : Coordonnees = joueuradverse.champ_de_bataille.recupererPosition(carte : carte)
+		joueuradverse.champ_de_bataille.supprimerCarte(cord : pos)	 
+		self.royaume.ajouterCarte(carte : carte)
+	}
+	
+    mutating func demobiliser(carte : Carte) {
+        if self.main.estVide() {
+            fatalError("On veut demobiliser une main avec une main vide")
+        }
+        //il faudrait vérifier que la carte est bien dans la main mais il faut donc rajouter une fonction dans le type Main
+        self.royaume.ajouterCarte(carte : Carte)
+        self.main.enleverCarte(carte : carte)
+    }
+	
+	func ciblesDisponible(joueuradverse : Joueur)->[Carte]{
+        
+        var unites: [Carte]
+        var champ_de_bataille_adverse : ChampDeBataille
+        var champ_de_bataille : ChampDeBataille
+        
+        unites = []
+        champ_de_bataille_adverse = joueuradverse.recupererChampDeBataille()
+        champ_de_bataille = self.champ_de_bataille
+        
+        for i in 0 ... 1 {
+            for j in 0 ... 2 {
+                position = Coordonnees(x:j,y:i)
+                if !champ_de_bataille_adverse.positionLibre(cord:position) {
+                    carte = champ_de_bataille.plateau[i][j];
+                    if unitePouvantAttaquer(joueuradverse : joueuradverse, carte : carte)!=[]{
+                        unites.append(champ_de_bataille_adverse.plateau[i][j])
+                    }
+                }
+            }
+        }
+        return unites
+	}
+    
+    
+    
+    //Modif specif ? On doit avoir acces au plateau du joueur adverse ?
+    func unitePouvantAttaquer(joueuradverse : Joueur, carte : Carte)->[Carte]{
+        
+        var champ_de_bataille_adverse : ChampDeBataille
+        var champ_de_bataille : ChampDeBataille
+        var position_carte : Coordonnees
+        var carte_attaquante : Carte
+        var portee: Portee
+        var unites: [Carte]
+        var position:Coordonnees
+        
+        unites = []
+        champ_de_bataille_adverse = joueuradverse.recupererChampDeBataille()
+        position_carte = champ_de_bataille_adverse.recupererPosition(carte : carte)
+        champ_de_bataille = self.champ_de_bataille
+        
+        for i in 0 ... 1 {
+            for j in 0 ... 2 {
+                position = Coordonnees(x:j,y:i)
+                if !champ_de_bataille.positionLibre(cord:position) {
+                    carte_attaquante = champ_de_bataille.plateau[i][j];
+                    for portee in carte_attaquante.portee{
+                        if(position_portee(position : position, portee : portee) == position_carte){
+                            unites.append(carte_attaquante)
+                        }
+                    }
+                }
+            }
+        }
+        return unites
+    }
     
     
     

@@ -9,4 +9,13 @@ struct Portee: PorteeProtocol{
         self.x=x
         self.y=y
     }
+	
+	  func positionX()->Int {
+        return self.x
+    }
+    
+    func positionY()->Int {
+        return self.y
+    }
+	
 }
