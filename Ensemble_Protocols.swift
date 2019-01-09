@@ -139,7 +139,9 @@ class Joueur {
     func peutAttaquer()->Bool {
         for carte in self.champ_de_bataille.plateau {
             if carte != Vide {
-                if carte.etat == Offensif {
+		var etat:etatCarte
+		etat=Offensif
+                if carte.etat == etat {
                     return True
                 }
             }
