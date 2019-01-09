@@ -1365,7 +1365,7 @@ func afficherMain(joueur: Joueur){
 func afficherUnites(unite: [Carte]){
 	var ligne : String
 	print("**********************************************")
-	for(let i =0;i<unite.count;++i){
+	for(let i = 0;i<unite.count;++i){
 
 		if(unite[i] is Carte){
 			ligne += ("-"+unite[i].recupererUnite()+"(id:"+unite[i].recupererIdCarte()+") -")
@@ -1397,7 +1397,7 @@ func choisirCoordonneeXY(JoueurSelectionner: Joueur,X : inout Int, Y : inout Int
 			}
 		}
 
-	}while(!(x < 3 && x >=0 && y < 2 && y>=0 && JoueurSelectionner.recupererChampDeBataille().positionLibre(x: X,y: Y)))
+	}while(!(x < 3 && x >= 0 && y < 2 && y>=0 && JoueurSelectionner.recupererChampDeBataille().positionLibre(x: X,y: Y)))
 }
 
 
@@ -1415,31 +1415,31 @@ func choisirTypeCarte()->uniteCarte{
 
 	var type : UniteCarte;
 	if(choix=="Soldat"){
-		type= UniteCarte.Soldat
+		type = UniteCarte.Soldat
 	}
 	else if(choix=="Archer"){
-		type= UniteCarte.Archer
-
+		type = UniteCarte.Archer
+	}
 	else if(choix=="Garde"){
-		type= UniteCarte.Garde
+		type = UniteCarte.Garde
 	}
 	return type
 }
 
 /* Initialisation de la partie */
 print("Joueur 1 : Veuillez saisir un nom pour votre joueur : ")
-var choix : String
+var choix2 : String
 
 if let typed = readLine(){
-	choix=typed
+	choix2=typed
 }
-var joueur1 = JoueurProtocol(nom : choix, num:1)
+var joueur1 = JoueurProtocol(nom : choix2, num:1)
 
 print("Joueur 2 : Veuillez saisir un nom pour votre joueur : ")
 if let typed = readLine(){
-	choix=typed
+	choix2=typed
 }
-var joueur2 = JoueurProtocol(nom : choix, num:2)
+var joueur2 = JoueurProtocol(nom : choix2, num:2)
 
 var joueurGagnant : JoueurProtocol
 var partiFini = false
@@ -1484,7 +1484,7 @@ var unite : [Carte]
 var pouvantAttaquer : [Carte]
 var attaquer : Carte //carte qui est attaqué
 var attaquant : Carte //Carte attaquante
-var attaque : false //permettant de lancer une attaque
+var attaque = false //permettant de lancer une attaque
 var X : Int //utilisé pour déployé une carte
 var Y : Int //utilisé pour déployé une carte
 
@@ -1548,7 +1548,7 @@ while(!partiFini){
 	} else if (choix == "attaquer"){
 	//-----------------------------------------------RAJOUTER REMPLISSAGE SANTE CARTES---------------------------------------------------------------------------------------------------------------------------
 		attaque = true
-		attaquer : CarteProtocol
+		var attaquer : CarteProtocol
 		while(attaque){
 	 		pouvantAttaquer = joueurActuel.UnitePouvantAttaquer()
 			cibleDisponible = joueurActuel.ciblesDisponible(joueur : joueurAdverse)
