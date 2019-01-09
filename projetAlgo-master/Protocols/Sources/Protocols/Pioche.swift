@@ -1,3 +1,29 @@
+class PiocheIterator : IteratorProtocol {
+    var pioche: Pioche
+    var i : Int = 0
+
+    init(pioche: Pioche) {
+        self.pioche = pioche
+    }
+
+    func next() -> Pioche? {
+    	let pile = self.pioche
+        if self.i < 0 || self.i >= self.pioche.nombreOccurence(){
+        	return nil 
+        }
+        else {
+        	self.i = self.i+1
+            for j in 0 ..< i{
+        	    Depiler(pioche : pile)
+            }
+            return pile[self.i-1]
+        }
+    }
+}
+
+
+
+
 import Foundation
 // Type Pioche contient une liste de carte et un itérateur permettant de la parcourir
 struct Pioche : PiocheProtocol {
@@ -73,7 +99,7 @@ struct Pioche : PiocheProtocol {
     }
     
     
-    mutating func melangerPioche()
+    mutating func melangerPioche(){
         var tmp : [Piece] = []
         while !estVide() {
             tmp.append(Sommet(pioche : self.pioche))
