@@ -32,7 +32,7 @@ class Joueur : JoueurProtocol {
             fatalError("On essaie de piocher dans une pioche vide")
         }
         
-        ajouterCarte(carte : Sommet(self.pioche))
+        main.ajouterCarte(carte : Sommet(self.pioche))
         pioche.supprimerCarte()
     }
     
@@ -44,7 +44,7 @@ class Joueur : JoueurProtocol {
                 }
             }
         }
-        return False
+        return false
     }
     
     func compterCarteChampDeBataille() -> Int{
@@ -77,7 +77,7 @@ class Joueur : JoueurProtocol {
     
 	
 	func avancerCarte(carte : Carte) {
-		var pos: Position = self.champ_de_bataille.recupererPosition(carte : carte)
+		var pos: Coordonnee = self.champ_de_bataille.recupererPosition(carte : carte)
 		self.champ_de_bataille.avancerCarte(cord : pos)
 	}
 	
