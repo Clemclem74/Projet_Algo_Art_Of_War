@@ -39,7 +39,9 @@ class Joueur : JoueurProtocol {
     func peutAttaquer()->Bool {
         for carte in self.champ_de_bataille.plateau {
             if carte != [nil] {
-                if carte.etat == Offensif {
+		var etat:etatCarte
+		etat=Offensif
+                if carte.etat == etat {
                     return True
                 }
             }
