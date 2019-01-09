@@ -1,12 +1,12 @@
 Portée : OK
-ChampDeBataille : OK
+ChampDeBataille : OK (Iterateur)
 Carte : OK
 Cimetiere : OK
 Joueur: OK
 Royaume : OK
-Pioche : 90% reste itérateur 
-Coordonnées : 80% mais pb
-Main : 90% reste itérateur
+Pioche : OK
+Coordonnées : OK
+Main : OK
 
 
 
