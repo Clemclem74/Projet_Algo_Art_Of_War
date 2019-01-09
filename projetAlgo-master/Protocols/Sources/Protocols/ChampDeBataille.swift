@@ -1,3 +1,31 @@
+class ChampIterator : IteratorProtocol {
+    var plateau: [[Carte?]]
+    var i : Int = 0
+    var j : Int = 0
+
+    init(plateau: Plateau) {
+        self.plateau = plateau
+    }
+
+    func next() -> Carte? {
+    	let tab = self.plateau
+        if self.i < 0 || self.i >= 2 || self.j>=3{
+        	return nil 
+        }
+        else {
+        	if self.j == 2{
+                self.j = 0
+                self.i = self.i +1
+            }
+            else{
+                self.j = self.j + 1
+            }
+        	return tab[i][j]
+        }
+    }
+}
+
+
 import Foundation
 class ChampDeBataille: ChampDeBatailleProtocol {
     var plateau: [[Carte?]] = [[Vide,Vide,Vide],[Vide,Vide,Vide]]
