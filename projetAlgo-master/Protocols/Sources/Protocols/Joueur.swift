@@ -135,7 +135,7 @@ class Joueur : JoueurProtocol {
         self.main.enleverCarte(carte : carte)
     }
 	
-	func position_portee(position : Coordonnees, portee : Portee) -> Coordonnees? {
+	privatefunc position_portee(position : Coordonnees, portee : Portee) -> Coordonnees? {
 		var cord : Coordonnees
 		switch (position) {
 			case (position.positionX()==0 && position.positionY()==0) :
