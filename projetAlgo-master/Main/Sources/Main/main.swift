@@ -103,13 +103,13 @@ var choix : String
 if let typed = readLine(){
 	choix=typed
 }
-var joueur1 = JoueurProtocol(nom : choix)
+var joueur1 = JoueurProtocol(nom : choix, num:1)
 
 print("Joueur 2 : Veuillez saisir un nom pour votre joueur : ")
 if let typed = readLine(){
 	choix=typed
 }
-var joueur2 = JoueurProtocol(nom : choix)
+var joueur2 = JoueurProtocol(nom : choix, num:2)
 
 var joueurGagnant : JoueurProtocol
 var partiFini = false
