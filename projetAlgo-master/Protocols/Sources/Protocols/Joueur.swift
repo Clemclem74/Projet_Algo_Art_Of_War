@@ -1,5 +1,6 @@
 
 class Joueur : JoueurProtocol {
+	var nom : String
     var main : Main
     var champ_de_bataille = ChampDeBataille()
     var pioche = Pioche()
